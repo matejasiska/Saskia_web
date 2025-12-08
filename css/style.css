@@ -1,37 +1,20 @@
-/* Fullscreen background with your image */
-
-/* Initial state of menu toggle hidden on desktop */
 .menu-toggle {
     display: none;
 }
 
 
 .background {
-    /* 1. Nastaví obrázek pozadí a jeho cestu */
     background-image: url('../images/Background/Spolu.jpeg');
-
-    /* 2. Zajistí, že se obrázek neopakuje, aby se nekreslily dlaždice */
     background-repeat: no-repeat;
-
-    /* 3. Změní velikost obrázku, aby pokryl celou plochu elementu (roztáhne se) */
     background-size: cover;
-
-    /* 4. Fixuje obrázek na místě, aby se při rolování stránky nehýbal s obsahem */
     background-attachment: fixed;
-
-    /* 5. Centruje obrázek */
     background-position: center center;
-
-    /* 6. Nastavte rozměry divu, aby byl viditelný, např. přes celou stránku */
     width: 100%;
     height: 100vh;
-    /* 'vh' znamená 100% výšky okna prohlížeče */
     position: fixed;
-    /* Zajistí, že pozadí bude fixní a za obsahem */
     top: 0;
     left: 0;
     z-index: -1;
-    /* Umístí pozadí pod ostatní obsah */
 }
 
 body {
@@ -40,7 +23,6 @@ body {
     background-size: cover;
     background-attachment: fixed;
     background-position: center center;
-    /* Další nastavení pro body... */
 }
 
 html {
@@ -48,51 +30,36 @@ html {
 }
 
 body {
-    /* Lepší font stack pro moderní vzhled */
     font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     line-height: 1.6;
     color: #333;
-
-    /* Flexbox pro Sticky Footer */
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     margin: 0;
-    /* Důležité: odebrání margin-top: 80px, aby fixed navbar fungoval správně */
     padding: 0;
 }
 
-/* KONTEJNER PRO HLAVNÍ OBSAH - roztáhne se a odsune footer */
 .content {
     flex-grow: 1;
-    /* Klíčová vlastnost pro odsunutí patičky */
-    /* Padding, aby se obsah nezobrazoval pod fixed navbarem.
-       90px je bezpečné odsazení (navbar má cca 80px výšku). */
     padding-top: 90px;
 }
 
-/* Navigace */
 .navbar {
     position: fixed;
     top: 0;
     width: 100%;
     height: auto;
     background: rgba(44, 62, 80, 0.85);
-    /* Tmavá modro-šedá s průhledností */
     padding: 15px 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     z-index: 10;
-
-    /* ZMĚNA: Použití Flexboxu pro uspořádání loga a menu */
     display: flex;
     align-items: center;
-    /* Vertikální zarovnání */
     padding-left: 20px;
-    /* Přidá odsazení vlevo pro logo */
     padding-right: 20px;
-    /* Udrží symetrii na pravé straně */
 }
 
 .navbar ul {
@@ -100,7 +67,6 @@ body {
     display: flex;
     justify-content: center;
     gap: 30px;
-    /* Pevnější mezery */
     padding: 0;
     margin: 0 auto;
 }
@@ -108,9 +74,7 @@ body {
 .navbar a {
     text-decoration: none;
     font-weight: 700;
-    /* Silnější font */
     color: #ecf0f1;
-    /* Světlý text (téměř bílá) */
     padding: 8px 15px;
     border-radius: 6px;
     transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
@@ -118,49 +82,37 @@ body {
 
 .navbar a:hover {
     background-color: #007bff;
-    /* Modrý akcent na hover */
     color: white;
     box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
 }
 
-/* Obsahové bloky */
 .block {
     max-width: 800px;
     background: rgba(255, 255, 255, 0.25);
-    /* 25% průhlednost */
     backdrop-filter: blur(10px);
-    /* Efekt rozostření pozadí (Glassmorphism) */
     -webkit-backdrop-filter: blur(10px);
-    /* Pro Safari */
     border: 1px solid rgba(255, 255, 255, 0.3);
-    /* Jemný rámeček */
-    /* ZMĚNA: Horní margin je nyní jednoduchý, protože odsazení od navbaru řeší .content */
     margin: 40px auto;
     padding: 40px;
-    /* Větší padding */
     border-radius: 12px;
-    /* Více zaoblené rohy */
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    /* Moderní, zvýšený stín */
 }
 
 .block h1 {
     margin-top: 0;
     color: #004a99;
-    /* Tmavší modrá pro lepší konstrast na průhledném pozadí */
     font-size: 2em;
     padding-bottom: 10px;
     border-bottom: 2px solid #e9ecef;
-    /* Světlá linka pod nadpisem */
 }
 
-/* Patička (Footer) */
-/* Patička (Footer) */
 footer {
     text-align: center;
-    padding: 40px 20px;
+    padding: 20px 20px;
     margin-top: 0;
-    background: #2c3e50;
+    background: rgba(44, 62, 80, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     color: #ecf0f1;
     font-size: 14px;
     box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
@@ -196,7 +148,6 @@ footer {
 
 .contact-item i {
     color: #3498db;
-    /* Icon color */
     font-size: 1.2em;
 }
 
@@ -214,7 +165,6 @@ footer {
     font-size: 12px;
 }
 
-/* IMAGE PLACEHOLDERS */
 .image-row {
     display: flex;
     gap: 20px;
@@ -234,20 +184,12 @@ footer {
     border-radius: 8px;
     position: relative;
     overflow: hidden;
-    /* Hide overflow if image is bigger */
     cursor: pointer;
-    /* Indicate clickable */
     padding: 0;
-    /* Remove padding for image */
     background-color: transparent;
-    /* Remove grey background if image exists */
     border: none;
-    /* Remove border if image exists */
 }
 
-/* Remove default text if image is present - generic way is hard in CSS only without JS classes, 
-   but we can style the img to cover it. The ::after pseudo-element is behind the image if formatted right 
-   or we can hide it. Let's make the image cover everything. */
 
 .image-placeholder img {
     width: 100%;
@@ -267,10 +209,8 @@ footer {
     font-weight: bold;
     position: absolute;
     z-index: -1;
-    /* Behind the image */
 }
 
-/* LIGHTBOX STYLES */
 #lightbox {
     position: fixed;
     z-index: 1000;
@@ -280,7 +220,6 @@ footer {
     height: 100%;
     background: rgba(0, 0, 0, 0.9);
     display: none;
-    /* Hidden by default */
     align-items: center;
     justify-content: center;
     opacity: 0;
@@ -297,9 +236,15 @@ footer {
     max-height: 90%;
     border-radius: 4px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+    cursor: zoom-in;
 }
 
-/* RESPONSIVE DESIGN (MOBILE) */
+#lightbox img.zoomed {
+    transform: scale(1.8);
+    cursor: zoom-out;
+}
+
 @media (max-width: 768px) {
     .footer-content {
         flex-direction: column;
@@ -315,18 +260,14 @@ footer {
 
     .navbar {
         position: relative;
-        /* Keep it relative so it pushes content down when open, or use fixed if preferred */
         flex-direction: column;
         height: auto;
         padding: 10px 20px;
         align-items: flex-start;
-        /* Align logo and toggle to left/right */
     }
 
-    /* Menu Toggle Button (Hamburger) */
     .menu-toggle {
         display: block;
-        /* Visible on mobile */
         position: absolute;
         top: 15px;
         right: 20px;
@@ -343,7 +284,6 @@ footer {
         transition: all 0.3s ease-in-out;
     }
 
-    /* Hamburger Animation */
     .menu-toggle.open span:nth-child(1) {
         transform: translateY(8px) rotate(45deg);
     }
@@ -356,7 +296,6 @@ footer {
         transform: translateY(-8px) rotate(-45deg);
     }
 
-    /* Hide menu by default on mobile */
     .navbar ul {
         display: none;
         flex-direction: column;
@@ -364,12 +303,11 @@ footer {
         width: 100%;
         margin-top: 15px;
         background-color: rgba(44, 62, 80, 0.95);
-        /* Opaque bg for menu */
+
         border-radius: 8px;
         overflow: hidden;
     }
 
-    /* Show menu when active */
     .navbar ul.active {
         display: flex;
     }
@@ -391,17 +329,14 @@ footer {
     .navbar-logo {
         display: inline-block;
         padding: 0;
-        /* Reset padding for logo */
         border-bottom: none;
         width: auto;
     }
 
-    /* Adjust content top padding */
     .content {
         padding-top: 20px;
     }
 
-    /* Make blocks fill more space */
     .block {
         max-width: 95%;
         margin: 20px auto;
@@ -410,5 +345,63 @@ footer {
 
     .block h1 {
         font-size: 1.6em;
+    }
+}
+
+.navbar a.active {
+    background-color: #007bff;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+}
+
+@media print {
+
+    .navbar,
+    .menu-toggle,
+    footer,
+    .background,
+    .social-links,
+    .contact-item i {
+        display: none !important;
+    }
+
+    body {
+        background: none;
+        color: black;
+        font-size: 12pt;
+    }
+
+    .content {
+        padding-top: 0;
+    }
+
+    .block {
+        background: none;
+        border: none;
+        box-shadow: none;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        margin: 0;
+        padding: 0;
+        max-width: 100%;
+        color: black;
+    }
+
+    .block h1 {
+        color: black;
+        border-bottom: 1px solid black;
+    }
+
+    .image-row {
+        page-break-inside: avoid;
+    }
+
+    a {
+        text-decoration: underline;
+        color: black;
+    }
+
+    a[href]:after {
+        content: " (" attr(href) ")";
     }
 }

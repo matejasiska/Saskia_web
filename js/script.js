@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* LIGHTBOX FUNCTIONALITY */
-    // 1. Create lightbox element if it doesn't exist
+
     let lightbox = document.getElementById('lightbox');
     if (!lightbox) {
         lightbox = document.createElement('div');
@@ -28,26 +28,78 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.appendChild(lightbox);
     }
 
-    // 2. Select all images inside placeholders
     const images = document.querySelectorAll('.image-placeholder img');
 
-    // 3. Add click event to open lightbox
     images.forEach(img => {
         img.addEventListener('click', e => {
             lightbox.classList.add('active');
 
-            // Create or update img element inside lightbox
+
             const lightboxImg = document.createElement('img');
             lightboxImg.src = img.src;
 
-            // Clear previous content and add new image
+
+            lightboxImg.onclick = (e) => {
+                e.stopPropagation();
+
+                if (lightboxImg.classList.contains('zoomed')) {
+                    lightboxImg.classList.remove('zoomed');
+                    setTimeout(() => {
+                        lightboxImg.style.transformOrigin = 'center center';
+                    }, 300);
+                } else {
+
+                    const rect = lightboxImg.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+
+
+                    lightboxImg.style.transformOrigin = `${x}px ${y}px`;
+
+                    lightboxImg.classList.add('zoomed');
+                }
+            };
+
+
+            lightboxImg.ondblclick = (e) => {
+                e.stopPropagation();
+                lightbox.classList.remove('active');
+            };
+
+
             lightbox.innerHTML = '';
             lightbox.appendChild(lightboxImg);
         });
     });
 
-    // 4. Close lightbox on click
     lightbox.onclick = () => {
         lightbox.classList.remove('active');
     };
+
+    /* ACTIVE MENU HIGHLIGHTING */
+    const currentPage = window.location.pathname.split("/").pop() || 'index.html';
+    const menuLinks = document.querySelectorAll('.navbar ul li a');
+
+    menuLinks.forEach(link => {
+        const linkPage = link.getAttribute('href');
+        if (linkPage === currentPage) {
+            link.classList.add('active');
+        }
+    });
+
+    /* DYNAMIC COPYRIGHT YEAR */
+    const copyrightElement = document.querySelector('.copyright');
+    if (copyrightElement) {
+        const currentYear = new Date().getFullYear();
+        const yearRegex = /\d{4}/;
+        if (copyrightElement.innerHTML.match(yearRegex)) {
+            copyrightElement.innerHTML = copyrightElement.innerHTML.replace(yearRegex, currentYear);
+        }
+    } else {
+        const footer = document.querySelector('footer');
+        if (footer && footer.innerText.includes('2025')) {
+            const currentYear = new Date().getFullYear();
+            footer.innerHTML = footer.innerHTML.replace('2025', currentYear);
+        }
+    }
 });
