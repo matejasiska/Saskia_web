@@ -155,17 +155,63 @@ body {
 }
 
 /* Patička (Footer) */
+/* Patička (Footer) */
 footer {
     text-align: center;
-    padding: 25px 0;
+    padding: 40px 20px;
     margin-top: 0;
-    /* Flexbox zajistí, že je dole, margin-top není potřeba */
     background: #2c3e50;
-    /* Tmavá barva pro kontrast */
     color: #ecf0f1;
-    /* Světlý text */
     font-size: 14px;
     box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto 20px auto;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #bdc3c7;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.contact-item a {
+    color: #bdc3c7;
+    text-decoration: none;
+}
+
+.contact-item:hover,
+.contact-item a:hover {
+    color: #fff;
+}
+
+.contact-item i {
+    color: #3498db;
+    /* Icon color */
+    font-size: 1.2em;
+}
+
+.social-links {
+    display: flex;
+    gap: 20px;
+}
+
+.copyright {
+    display: block;
+    margin-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+    color: #7f8c8d;
+    font-size: 12px;
 }
 
 /* IMAGE PLACEHOLDERS */
@@ -188,16 +234,85 @@ footer {
     border-radius: 8px;
     position: relative;
     overflow: hidden;
+    /* Hide overflow if image is bigger */
+    cursor: pointer;
+    /* Indicate clickable */
+    padding: 0;
+    /* Remove padding for image */
+    background-color: transparent;
+    /* Remove grey background if image exists */
+    border: none;
+    /* Remove border if image exists */
+}
+
+/* Remove default text if image is present - generic way is hard in CSS only without JS classes, 
+   but we can style the img to cover it. The ::after pseudo-element is behind the image if formatted right 
+   or we can hide it. Let's make the image cover everything. */
+
+.image-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.image-placeholder:hover img {
+    transform: scale(1.05);
 }
 
 .image-placeholder::after {
     content: "Image Space";
     color: #888;
     font-weight: bold;
+    position: absolute;
+    z-index: -1;
+    /* Behind the image */
+}
+
+/* LIGHTBOX STYLES */
+#lightbox {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: none;
+    /* Hidden by default */
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#lightbox.active {
+    display: flex;
+    opacity: 1;
+}
+
+#lightbox img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 4px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
 /* RESPONSIVE DESIGN (MOBILE) */
 @media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .social-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
     .navbar {
         position: relative;
         /* Keep it relative so it pushes content down when open, or use fixed if preferred */
