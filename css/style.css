@@ -161,3 +161,46 @@ footer {
     font-size: 14px;
     box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
 }
+
+/* RESPONSIVE DESIGN (MOBILE) */
+@media (max-width: 768px) {
+
+    /* Make navbar scrollable so it doesn't cover content */
+    .navbar {
+        position: relative;
+        flex-direction: column;
+        height: auto;
+        padding: 10px 0;
+    }
+
+    .navbar ul {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .navbar a {
+        display: block;
+        text-align: center;
+        width: 80%;
+        /* Slightly less than full width */
+        margin: 0 auto;
+    }
+
+    /* Adjust content top padding (navbar is not fixed anymore) */
+    .content {
+        padding-top: 20px;
+    }
+
+    /* Make blocks fill more space */
+    .block {
+        max-width: 95%;
+        margin: 20px auto;
+        padding: 20px;
+    }
+
+    .block h1 {
+        font-size: 1.6em;
+    }
+}
