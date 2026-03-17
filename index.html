@@ -7,10 +7,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <title>Saskia Kafková</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Caveat:wght@400;600&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Cormorant:ital,wght@0,300;0,600;1,300;1,600&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════
-   DESIGN TOKENS — dark warm palette everywhere
+   DESIGN TOKENS
 ═══════════════════════════════════════════ */
 :root{
   --bg:          #1e1a15;
@@ -44,7 +44,7 @@ body{background:var(--bg);color:var(--ink);font-family:'Jost',sans-serif;font-we
 .lang-divider{width:1px;height:10px;background:var(--gold-dim)}
 
 /* ═══════════════════════════════════════════
-   DESKTOP NAV — ink-circle reveal
+   DESKTOP NAV — full-screen overlay with artwork texture
 ═══════════════════════════════════════════ */
 .nav-trigger{position:fixed;top:18px;right:22px;z-index:1001;width:var(--nav-size);height:var(--nav-size);background:var(--ink);border-radius:50%;cursor:pointer;border:none;display:flex;align-items:center;justify-content:center;transition:transform .4s cubic-bezier(.34,1.56,.64,1);box-shadow:0 4px 20px rgba(8,6,4,.5)}
 .nav-trigger:hover{transform:scale(1.1)}
@@ -53,13 +53,64 @@ body{background:var(--bg);color:var(--ink);font-family:'Jost',sans-serif;font-we
 .nav-open .nav-trigger .lines span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
 .nav-open .nav-trigger .lines span:nth-child(2){opacity:0;transform:scaleX(0)}
 .nav-open .nav-trigger .lines span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
-.nav-overlay{position:fixed;inset:0;z-index:999;display:flex;align-items:center;justify-content:flex-end;pointer-events:none}
-.nav-overlay::before{content:'';position:absolute;top:18px;right:22px;width:var(--nav-size);height:var(--nav-size);background:var(--bg-surface);border-radius:50%;transform:scale(0);transition:transform .7s cubic-bezier(.77,0,.175,1)}
+
+/* Overlay fills full screen, artwork texture prosvítá */
+.nav-overlay{
+  position:fixed;inset:0;z-index:999;
+  display:flex;align-items:center;justify-content:flex-end;
+  pointer-events:none;
+}
+/* Dark tinted background that scales from button */
+.nav-overlay::before{
+  content:'';
+  position:absolute;
+  top:18px;right:22px;
+  width:var(--nav-size);height:var(--nav-size);
+  background:var(--bg-surface);
+  border-radius:50%;
+  transform:scale(0);
+  transition:transform .7s cubic-bezier(.77,0,.175,1);
+}
+/* Artwork texture layer — Spolu.jpeg at low opacity */
+.nav-artwork{
+  position:absolute;inset:0;
+  background-image:url('images/Background/Spolu.jpeg');
+  background-size:cover;
+  background-position:center 30%;
+  opacity:0;
+  mix-blend-mode:luminosity;
+  transition:opacity .5s .3s;
+  pointer-events:none;
+}
+.nav-open .nav-artwork{opacity:.17}
 .nav-open .nav-overlay{pointer-events:all}
-.nav-open .nav-overlay::before{transform:scale(50)}
-.nav-links{position:relative;z-index:2;padding-right:80px;display:flex;flex-direction:column;gap:6px;align-items:flex-end;opacity:0;transform:translateX(20px);transition:opacity .2s,transform .3s}
+.nav-open .nav-overlay::before{transform:scale(80)}
+
+.nav-links{
+  position:relative;z-index:2;
+  padding-right:80px;
+  display:flex;flex-direction:column;gap:4px;
+  align-items:flex-end;
+  opacity:0;transform:translateX(20px);
+  transition:opacity .2s,transform .3s;
+}
 .nav-open .nav-links{opacity:1;transform:translateX(0);transition:opacity .4s .4s,transform .4s .4s}
-.nav-links a{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.8rem);font-weight:300;font-style:italic;color:var(--ink);text-decoration:none;line-height:1.2;transition:color .3s;display:block;position:relative}
+
+/* Nav links — Cormorant Garamond, capitals via CSS */
+.nav-links a{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.8rem,4.5vw,3.4rem);
+  font-weight:600;
+  font-style:normal;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--ink);
+  text-decoration:none;
+  line-height:1.15;
+  transition:color .3s;
+  display:block;
+  position:relative;
+}
 .nav-links a::after{content:'';position:absolute;bottom:2px;left:0;width:0;height:1px;background:var(--gold);transition:width .4s}
 .nav-links a:hover{color:var(--gold)}
 .nav-links a:hover::after{width:100%}
@@ -75,7 +126,20 @@ body{background:var(--bg);color:var(--ink);font-family:'Jost',sans-serif;font-we
 .hero-ink-svg{position:absolute;inset:0;pointer-events:none}
 .hero-content{position:relative;z-index:2}
 .hero-eyebrow{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:16px;opacity:0;animation:fadeUp 1s .3s forwards}
-.hero-name{font-family:'Caveat',cursive;font-size:clamp(3.5rem,10vw,8rem);font-weight:600;line-height:.9;color:var(--ink);margin-bottom:20px;text-shadow:0 2px 30px rgba(8,6,4,.35);opacity:0;animation:fadeUp 1s .5s forwards}
+/* Hero name — Cormorant Garamond, elegant weight */
+.hero-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3.8rem,11vw,9rem);
+  font-weight:600;
+  font-style:italic;
+  line-height:.88;
+  color:var(--ink);
+  margin-bottom:22px;
+  text-shadow:0 2px 40px rgba(8,6,4,.4);
+  opacity:0;
+  animation:fadeUp 1s .5s forwards;
+  letter-spacing:-.01em;
+}
 .hero-tagline{font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,2vw,1.3rem);font-style:italic;color:rgba(240,235,224,.68);max-width:380px;line-height:1.6;opacity:0;animation:fadeUp 1s .7s forwards}
 .scroll-hint{position:absolute;bottom:7vh;right:6vw;z-index:2;display:flex;align-items:center;gap:10px;opacity:0;animation:fadeIn 1s 1.2s forwards}
 .scroll-hint span{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-dim);writing-mode:vertical-rl}
@@ -90,7 +154,18 @@ body{background:var(--bg);color:var(--ink);font-family:'Jost',sans-serif;font-we
 .section{padding:clamp(60px,10vw,110px) clamp(24px,8vw,140px);max-width:1200px;margin:0 auto}
 .section-label{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:12px;display:flex;align-items:center;gap:16px}
 .section-label::after{content:'';flex:0 0 36px;height:1px;background:var(--gold-dim)}
-.sec-h2{font-family:'Caveat',cursive;font-size:clamp(2.2rem,5vw,3.6rem);font-weight:600;line-height:1;color:var(--ink);margin-bottom:24px}
+
+/* Section headings — Cormorant Garamond, replaces Caveat everywhere */
+.sec-h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.4rem,5.5vw,4rem);
+  font-weight:600;
+  font-style:italic;
+  line-height:.95;
+  color:var(--ink);
+  margin-bottom:24px;
+  letter-spacing:-.01em;
+}
 .body-text{font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,1.5vw,1.18rem);line-height:1.88;color:var(--ink-muted);max-width:560px}
 
 /* ═══════════════════════════════════════════
@@ -99,51 +174,141 @@ body{background:var(--bg);color:var(--ink);font-family:'Jost',sans-serif;font-we
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
 .about-img{position:relative;aspect-ratio:3/4;background:var(--bg-surface);overflow:hidden;border-radius:2px}
 .about-img::before{content:'';position:absolute;top:-8px;right:-8px;width:100%;height:100%;border:1px solid var(--gold-dim);opacity:.5;z-index:-1}
-.about-img-ph{width:100%;height:100%;background:linear-gradient(160deg,#2f2820,#3a2e1e);display:flex;align-items:center;justify-content:center;font-family:'Caveat',cursive;font-size:.9rem;color:var(--gold-dim)}
+.about-img-ph{width:100%;height:100%;background:linear-gradient(160deg,#2f2820,#3a2e1e);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.9rem;color:var(--gold-dim)}
 .about-img img{width:100%;height:100%;object-fit:cover}
 
 /* ═══════════════════════════════════════════
-   EXPERIENCE
-═══════════════════════════════════════════ */
-.exp-section{background:var(--bg-surface);padding:clamp(60px,10vw,110px) clamp(24px,8vw,140px)}
-.exp-inner{max-width:1200px;margin:0 auto}
-
-/* ═══════════════════════════════════════════
-   GALLERY SHARED
+   GALLERY SHARED — fullscreen slideshow
 ═══════════════════════════════════════════ */
 .gallery-wrap{padding:clamp(60px,8vw,100px) 0;background:var(--bg-surface)}
 .gallery-wrap.light{background:var(--bg)}
 .gallery-header{padding:0 clamp(24px,8vw,140px);margin-bottom:44px;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px}
-.gallery-filters{display:flex;gap:20px}
-.fbtn{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold-dim);background:none;border:none;cursor:pointer;padding:0;position:relative;transition:color .3s;font-family:'Jost',sans-serif}
-.fbtn.on{color:var(--ink)}
-.fbtn.on::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--ink)}
 
-/* ── MASONRY (desktop + tablet) ── */
-.masonry{padding:0 clamp(24px,8vw,140px);columns:3;column-gap:12px}
-.mitem{break-inside:avoid;margin-bottom:12px;position:relative;overflow:hidden;cursor:pointer;background:var(--bg-surface2);border-radius:2px}
-.mitem:hover .mimg-inner{transform:scale(1.04);filter:brightness(1.08)}
-.mimg-inner{width:100%;display:block;transition:transform .6s cubic-bezier(.23,1,.32,1),filter .4s}
-.mimg-inner img{width:100%;display:block;object-fit:cover}
-.mov{position:absolute;inset:0;background:rgba(8,6,4,0);display:flex;align-items:flex-end;padding:18px;transition:background .4s}
-.mitem:hover .mov{background:rgba(8,6,4,.45)}
-.mlabel{font-family:'Caveat',cursive;font-size:1rem;color:var(--ink);opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s}
-.mitem:hover .mlabel{opacity:1;transform:translateY(0)}
+/* ── SLIDESHOW — 1 focussed image + 4 thumbs ── */
+.slideshow{
+  position:relative;
+  padding:0 clamp(24px,8vw,140px);
+}
+.slide-main{
+  position:relative;
+  width:100%;
+  aspect-ratio:16/9;
+  max-height:72vh;
+  overflow:hidden;
+  background:var(--bg-surface2);
+  border-radius:2px;
+  cursor:pointer;
+}
+.slide-main-img{
+  position:absolute;inset:0;
+  transition:opacity .55s cubic-bezier(.23,1,.32,1),transform .55s cubic-bezier(.23,1,.32,1);
+  opacity:0;
+  transform:scale(1.03);
+}
+.slide-main-img.active{opacity:1;transform:scale(1)}
+.slide-main-img .ph{
+  width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.9rem;color:var(--gold-dim);
+}
+.slide-main-img img{width:100%;height:100%;object-fit:cover;display:block}
 
-/*
-  ── PLACEHOLDER SHAPES ──
-  To swap in a real photo, replace:
-    <div class="ph-tall"><div class="ph-lbl">…</div></div>
-  with:
-    <img src="images/yourphoto.webp" alt="…" loading="lazy">
-  inside the same .mimg-inner div. Keep .mov and .mlabel untouched.
-  To add more images, duplicate any .mitem block.
-*/
-.ph-tall {width:100%;padding-bottom:130%;background:linear-gradient(180deg,#2a231a,#1e1a15);position:relative}
-.ph-med  {width:100%;padding-bottom:78%; background:linear-gradient(180deg,#2f2820,#231e18);position:relative}
-.ph-wide {width:100%;padding-bottom:65%; background:linear-gradient(180deg,#252018,#1a1714);position:relative}
-.ph-short{width:100%;padding-bottom:55%; background:linear-gradient(180deg,#312920,#251f18);position:relative}
-.ph-lbl{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Caveat',cursive;font-size:.8rem;color:var(--gold-dim)}
+/* Caption bar */
+.slide-caption{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:20px 24px;
+  background:linear-gradient(to top,rgba(8,6,4,.7),transparent);
+  display:flex;justify-content:space-between;align-items:flex-end;
+  z-index:3;
+}
+.slide-label{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.05rem;font-style:italic;
+  color:var(--ink);opacity:.9;
+}
+.slide-counter{font-size:10px;letter-spacing:.2em;color:var(--gold-dim);font-family:'Jost',sans-serif}
+
+/* Nav arrows */
+.slide-arrow{
+  position:absolute;top:50%;transform:translateY(-50%);
+  z-index:4;background:none;border:1px solid rgba(196,168,130,.25);
+  color:var(--ink);width:44px;height:44px;border-radius:50%;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:background .3s,border-color .3s;
+  font-size:18px;line-height:1;
+}
+.slide-arrow:hover{background:rgba(196,168,130,.15);border-color:var(--gold)}
+.slide-arrow.prev{left:clamp(28px,8vw,148px)}
+.slide-arrow.next{right:clamp(28px,8vw,148px)}
+
+/* Dot strip */
+.slide-dots{
+  display:flex;justify-content:center;gap:8px;
+  margin-top:18px;
+}
+.sdot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--gold-dim);
+  cursor:pointer;
+  transition:background .3s,transform .3s;
+  border:none;padding:0;
+}
+.sdot.on{background:var(--gold);transform:scale(1.4)}
+
+/* Thumb strip */
+.slide-thumbs{
+  display:flex;gap:8px;margin-top:10px;
+}
+.sthumb{
+  flex:1;aspect-ratio:4/3;overflow:hidden;
+  background:var(--bg-surface2);border-radius:2px;
+  cursor:pointer;position:relative;
+  border:1px solid transparent;
+  transition:border-color .3s;
+}
+.sthumb.active{border-color:var(--gold)}
+.sthumb .ph{
+  width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.75rem;color:var(--gold-dim);
+  background:linear-gradient(160deg,#2a231a,#1e1a15);
+}
+.sthumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.sthumb:hover img{transform:scale(1.06)}
+
+/* ── GALLERY SUBSECTION (tetování / malby podsekce) ── */
+.gallery-subsec{
+  padding:clamp(40px,6vw,80px) clamp(24px,8vw,140px);
+  border-top:1px solid var(--border);
+}
+.gallery-subsec:first-child{border-top:none}
+.subsec-label{
+  font-size:10px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--gold-dim);margin-bottom:8px;
+  font-family:'Jost',sans-serif;
+}
+.subsec-h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.6rem,3.5vw,2.4rem);
+  font-weight:600;font-style:italic;
+  color:var(--ink);margin-bottom:14px;
+  line-height:1;
+}
+.subsec-body{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(.95rem,1.4vw,1.1rem);
+  line-height:1.85;color:var(--ink-muted);
+  max-width:520px;margin-bottom:32px;
+}
+
+/* Technique tags */
+.tech-tags{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px}
+.ttag{
+  font-size:9px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);border:1px solid rgba(196,168,130,.25);
+  padding:5px 12px;border-radius:1px;
+  font-family:'Jost',sans-serif;
+}
 
 /* ═══════════════════════════════════════════
    RITUALS
@@ -153,21 +318,70 @@ body{background:var(--bg);color:var(--ink);font-family:'Jost',sans-serif;font-we
 .rcard::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--gold);transform:scaleY(0);transform-origin:top;transition:transform .4s cubic-bezier(.23,1,.32,1)}
 .rcard:hover{background:var(--bg-surface2)}
 .rcard:hover::before,.rcard:active::before{transform:scaleY(1)}
-.rnum{font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-style:italic;color:var(--gold);opacity:.2;line-height:1;margin-bottom:14px}
-.rcard h3{font-family:'Caveat',cursive;font-size:1.4rem;color:var(--ink);margin-bottom:10px}
+.rnum{
+  font-family:'Cormorant Garamond',serif;
+  font-size:3.5rem;font-style:italic;
+  color:var(--gold);opacity:.2;line-height:1;margin-bottom:14px;
+}
+.rcard h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.5rem;font-weight:600;font-style:italic;
+  color:var(--ink);margin-bottom:10px;
+}
 .rcard p{font-size:.88rem;color:var(--ink-muted);line-height:1.7;font-family:'Jost',sans-serif;font-weight:300}
+
+/* ═══════════════════════════════════════════
+   EXHIBITIONS — Výstavy
+═══════════════════════════════════════════ */
+.exhibitions-sec{
+  padding:clamp(60px,10vw,110px) clamp(24px,8vw,140px);
+  background:var(--bg-surface);
+}
+.exh-inner{max-width:1200px;margin:0 auto}
+.exh-list{margin-top:44px;display:flex;flex-direction:column;gap:0}
+.exh-item{
+  display:grid;grid-template-columns:120px 1fr auto;
+  gap:32px;align-items:baseline;
+  padding:22px 0;
+  border-bottom:1px solid var(--border);
+  transition:background .3s;
+}
+.exh-item:first-child{border-top:1px solid var(--border)}
+.exh-date{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.05rem;font-style:italic;
+  color:var(--gold);opacity:.75;
+}
+.exh-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.1rem;font-weight:300;
+  color:var(--ink);line-height:1.4;
+}
+.exh-place{
+  font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold-dim);font-family:'Jost',sans-serif;
+  text-align:right;
+}
 
 /* ═══════════════════════════════════════════
    CONTACT
 ═══════════════════════════════════════════ */
 .contact-sec{padding:clamp(60px,10vw,110px) clamp(24px,8vw,140px);background:var(--bg-contact);position:relative;overflow:hidden}
-.contact-sec::before{content:'spolu';font-family:'Caveat',cursive;font-size:clamp(7rem,22vw,20rem);color:rgba(240,235,224,.025);position:absolute;right:-1vw;bottom:-.15em;line-height:1;pointer-events:none;user-select:none}
+.contact-sec::before{
+  content:'spolu';
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-size:clamp(7rem,22vw,20rem);
+  color:rgba(240,235,224,.025);
+  position:absolute;right:-1vw;bottom:-.15em;
+  line-height:1;pointer-events:none;user-select:none;
+}
 .cgrid{display:grid;grid-template-columns:1fr 1fr;gap:72px;margin-top:44px}
 .clabel{font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold-dim);display:block;margin-bottom:5px;font-family:'Jost',sans-serif}
 .cval{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-style:italic;color:var(--ink);display:block;margin-bottom:26px}
 .cval a{color:var(--ink);text-decoration:none;border-bottom:1px solid rgba(240,235,224,.15);transition:border-color .3s}
 .cval a:hover{border-color:var(--gold)}
-.ig-handle{font-family:'Caveat',cursive;font-size:1.25rem;color:var(--ink);text-decoration:none;opacity:.5;transition:opacity .3s;display:inline-flex;align-items:center;gap:7px;margin-right:28px;margin-top:8px}
+.ig-handle{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.2rem;color:var(--ink);text-decoration:none;opacity:.5;transition:opacity .3s;display:inline-flex;align-items:center;gap:7px;margin-right:28px;margin-top:8px}
 .ig-handle:hover,.ig-handle:active{opacity:1}
 .ig-handle::before{content:'◎';font-size:.75em;color:var(--gold)}
 .contact-quote{font-family:'Cormorant Garamond',serif;font-size:1.12rem;font-style:italic;color:var(--ink);opacity:.48;line-height:1.9;margin-top:8px}
@@ -177,7 +391,11 @@ body{background:var(--bg);color:var(--ink);font-family:'Jost',sans-serif;font-we
 ═══════════════════════════════════════════ */
 footer{background:var(--bg-footer);padding:22px clamp(24px,8vw,140px);display:flex;justify-content:space-between;align-items:center}
 .fcopy{font-size:11px;letter-spacing:.1em;color:var(--gold-dim);font-family:'Jost',sans-serif}
-.fname{font-family:'Caveat',cursive;font-size:1.05rem;color:var(--ink);opacity:.2}
+.fname{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-size:1.05rem;
+  color:var(--ink);opacity:.2;
+}
 
 /* ═══════════════════════════════════════════
    LIGHTBOX
@@ -196,7 +414,7 @@ footer{background:var(--bg-footer);padding:22px clamp(24px,8vw,140px);display:fl
 .reveal.vis{opacity:1;transform:translateY(0)}
 
 /* ═══════════════════════════════════════════
-   TABLET  ≤ 860px
+   TABLET ≤ 860px
 ═══════════════════════════════════════════ */
 @media(max-width:860px){
   .about-grid{grid-template-columns:1fr;gap:36px}
@@ -204,13 +422,16 @@ footer{background:var(--bg-footer);padding:22px clamp(24px,8vw,140px);display:fl
   .rituals-grid{grid-template-columns:1fr;gap:2px}
   .rcard:first-child{border-radius:10px 10px 0 0}
   .rcard:last-child{border-radius:0 0 10px 10px}
-  .masonry{columns:2}
   .cgrid{grid-template-columns:1fr;gap:28px}
   footer{flex-direction:column;gap:6px;text-align:center}
+  .exh-item{grid-template-columns:80px 1fr;gap:16px}
+  .exh-place{grid-column:1/-1;text-align:left}
+  .slide-thumbs{display:none}
+  .slide-arrow{display:none}
 }
 
 /* ═══════════════════════════════════════════
-   MOBILE  ≤ 600px
+   MOBILE ≤ 600px
 ═══════════════════════════════════════════ */
 @media(max-width:600px){
   .nav-trigger,.nav-overlay{display:none}
@@ -221,11 +442,13 @@ footer{background:var(--bg-footer);padding:22px clamp(24px,8vw,140px);display:fl
   .body-text{max-width:100%;font-size:1.05rem}
   .about-grid{gap:28px}
   .about-img{border-radius:10px}
-  .exp-section{padding:40px 22px}
   .gallery-wrap{padding:36px 0}
   .gallery-header{padding:0 22px;margin-bottom:18px}
-  .masonry{display:none}
-  .mob-carousel-wrap{display:block}
+  .slideshow{padding:0 12px}
+  .slide-arrow{display:none}
+  .slide-thumbs{display:none}
+  .slide-main{aspect-ratio:4/3;max-height:55vw}
+  .gallery-subsec{padding:32px 22px}
   .rituals-grid{margin-top:28px}
   .rcard{padding:24px 20px}
   .contact-sec{padding:48px 22px 44px}
@@ -233,6 +456,9 @@ footer{background:var(--bg-footer);padding:22px clamp(24px,8vw,140px);display:fl
   .ig-handle{margin-right:20px}
   footer{flex-direction:column;gap:5px;text-align:center;padding:16px 22px calc(14px + var(--safe-bottom))}
   .lb-close{top:18px;right:18px}
+  .exh-item{grid-template-columns:1fr;gap:4px;padding:16px 0}
+  .exh-place{text-align:left}
+  .exhibitions-sec{padding:40px 22px}
 }
 
 /* ═══════════════════════════════════════════
@@ -251,7 +477,11 @@ footer{background:var(--bg-footer);padding:22px clamp(24px,8vw,140px);display:fl
 .mob-nav-cards{position:absolute;bottom:0;right:0;width:220px;pointer-events:none}
 .mncard{position:absolute;bottom:0;right:0;width:210px;background:var(--bg-surface);border:1px solid var(--border);border-radius:14px;padding:13px 18px 13px 16px;cursor:pointer;text-decoration:none;display:flex;align-items:center;justify-content:space-between;opacity:0;transform:translateY(0) rotate(0deg) scale(.88);transition:transform .5s cubic-bezier(.23,1,.32,1),opacity .35s ease,background .2s;box-shadow:0 4px 20px rgba(8,6,4,.4)}
 .mncard:active{background:var(--bg-surface2)}
-.mncard-label{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--ink);line-height:1}
+.mncard-label{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.05rem;font-style:italic;
+  color:var(--ink);line-height:1;
+}
 .mncard-num{font-family:'Jost',sans-serif;font-size:9px;letter-spacing:.18em;color:var(--gold-dim)}
 .mob-nav-open .mob-nav-cards{pointer-events:all}
 .mob-nav-open .mncard:nth-child(1){opacity:1;transform:translateY(-68px)  rotate(-1.5deg);transition-delay:.03s}
@@ -260,24 +490,7 @@ footer{background:var(--bg-footer);padding:22px clamp(24px,8vw,140px);display:fl
 .mob-nav-open .mncard:nth-child(4){opacity:1;transform:translateY(-254px) rotate(1deg);   transition-delay:.15s}
 .mob-nav-open .mncard:nth-child(5){opacity:1;transform:translateY(-316px) rotate(1.5deg); transition-delay:.19s}
 .mob-nav-open .mncard:nth-child(6){opacity:1;transform:translateY(-378px) rotate(2deg);   transition-delay:.23s}
-
-/* ═══════════════════════════════════════════
-   MOBILE CAROUSEL
-═══════════════════════════════════════════ */
-.mob-carousel-wrap{display:none}
-.mob-carousel{display:flex;gap:12px;padding:4px 22px 16px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;cursor:grab}
-.mob-carousel::-webkit-scrollbar{display:none}
-.mob-carousel.grabbing{cursor:grabbing}
-.mob-cslide{flex:0 0 74vw;max-width:290px;scroll-snap-align:start;position:relative;border-radius:10px;overflow:hidden;background:var(--bg-surface2)}
-.mob-cslide img{width:100%;display:block;aspect-ratio:3/4;object-fit:cover}
-.mob-cslide.wide img{aspect-ratio:4/3}
-.mob-cslide-ph{width:100%;aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;font-family:'Caveat',cursive;font-size:.85rem;color:var(--gold-dim)}
-.mob-cslide.wide .mob-cslide-ph{aspect-ratio:4/3}
-.mob-cslide-ov{position:absolute;bottom:0;left:0;right:0;padding:14px 16px;background:linear-gradient(to top,rgba(8,6,4,.65),transparent)}
-.mob-cslide-label{font-family:'Caveat',cursive;font-size:1rem;color:var(--ink);line-height:1}
-.carousel-dots{display:flex;justify-content:center;gap:6px;padding:0 0 8px}
-.cdot{width:5px;height:5px;border-radius:50%;background:var(--gold-dim);transition:transform .3s,background .3s}
-.cdot.on{background:var(--gold);transform:scale(1.4)}
+.mob-nav-open .mncard:nth-child(7){opacity:1;transform:translateY(-440px) rotate(2.4deg); transition-delay:.27s}
 </style>
 </head>
 <body>
@@ -294,12 +507,14 @@ footer{background:var(--bg-footer);padding:22px clamp(24px,8vw,140px);display:fl
   <div class="lines"><span></span><span></span><span></span></div>
 </button>
 <div class="nav-overlay" id="navOverlay">
+  <div class="nav-artwork"></div>
   <nav class="nav-links">
     <a href="#omne"><span class="cs">Něco o mně</span><span class="en" style="display:none">About me</span></a>
-    <a href="#zkus"><span class="cs">Zkušenosti</span><span class="en" style="display:none">Experience</span></a>
     <a href="#tet"><span class="cs">Tetování</span><span class="en" style="display:none">Tattoo</span></a>
-    <a href="#malby"><span class="cs">Malby</span><span class="en" style="display:none">Paintings</span></a>
     <a href="#rit"><span class="cs">Rituály</span><span class="en" style="display:none">Rituals</span></a>
+    <a href="#malby"><span class="cs">Malby</span><span class="en" style="display:none">Paintings</span></a>
+    <a href="projekt.html"><span class="cs">Jiné projekty</span><span class="en" style="display:none">Other projects</span></a>
+    <a href="#vystava"><span class="cs">Výstavy</span><span class="en" style="display:none">Exhibitions</span></a>
     <a href="#kontakt"><span class="cs">Kontakt</span><span class="en" style="display:none">Contact</span></a>
   </nav>
 </div>
@@ -309,11 +524,12 @@ footer{background:var(--bg-footer);padding:22px clamp(24px,8vw,140px);display:fl
   <div class="mob-nav-backdrop" id="mobNavBackdrop"></div>
   <div class="mob-nav-cards">
     <a class="mncard" href="#omne"><span class="mncard-label"><span class="cs">Něco o mně</span><span class="en" style="display:none">About me</span></span><span class="mncard-num">01</span></a>
-    <a class="mncard" href="#zkus"><span class="mncard-label"><span class="cs">Zkušenosti</span><span class="en" style="display:none">Experience</span></span><span class="mncard-num">02</span></a>
-    <a class="mncard" href="#tet"><span class="mncard-label"><span class="cs">Tetování</span><span class="en" style="display:none">Tattoo</span></span><span class="mncard-num">03</span></a>
+    <a class="mncard" href="#tet"><span class="mncard-label"><span class="cs">Tetování</span><span class="en" style="display:none">Tattoo</span></span><span class="mncard-num">02</span></a>
+    <a class="mncard" href="#rit"><span class="mncard-label"><span class="cs">Rituály</span><span class="en" style="display:none">Rituals</span></span><span class="mncard-num">03</span></a>
     <a class="mncard" href="#malby"><span class="mncard-label"><span class="cs">Malby</span><span class="en" style="display:none">Paintings</span></span><span class="mncard-num">04</span></a>
-    <a class="mncard" href="#rit"><span class="mncard-label"><span class="cs">Rituály</span><span class="en" style="display:none">Rituals</span></span><span class="mncard-num">05</span></a>
-    <a class="mncard" href="#kontakt"><span class="mncard-label"><span class="cs">Kontakt</span><span class="en" style="display:none">Contact</span></span><span class="mncard-num">06</span></a>
+    <a class="mncard" href="projekt.html"><span class="mncard-label"><span class="cs">Jiné projekty</span><span class="en" style="display:none">Other projects</span></span><span class="mncard-num">05</span></a>
+    <a class="mncard" href="#vystava"><span class="mncard-label"><span class="cs">Výstavy</span><span class="en" style="display:none">Exhibitions</span></span><span class="mncard-num">06</span></a>
+    <a class="mncard" href="#kontakt"><span class="mncard-label"><span class="cs">Kontakt</span><span class="en" style="display:none">Contact</span></span><span class="mncard-num">07</span></a>
   </div>
   <button class="mob-nav-trigger" id="mobNavTrigger" aria-label="Menu">
     <div class="mlines"><span></span><span></span><span></span></div>
@@ -330,8 +546,7 @@ footer{background:var(--bg-footer);padding:22px clamp(24px,8vw,140px);display:fl
           <path d="M-20 320 Q200 280 400 340 Q620 405 860 308 Q1010 255 1210 298 Q1360 328 1465 285" stroke-width="2" opacity="0.1"/>
           <path d="M80 505 Q290 460 545 522 Q710 552 905 488 Q1105 428 1310 468" stroke-width="1.2" opacity="0.06"/>
           <path d="M604 418 L606 512" stroke-width=".8" opacity="0.14"/>
-          <text x="548" y="440" font-family="cursive" font-size="29" fill="#c4a882" opacity="0.06" transform="rotate(-2,548,440)">spolu</text>
-          <circle cx="822" cy="358" r="2"   fill="#c4a882" opacity="0.08"/>
+          <circle cx="822" cy="358" r="2" fill="#c4a882" opacity="0.08"/>
           <circle cx="842" cy="382" r="2.4" fill="#c4a882" opacity="0.07"/>
         </g>
       </svg>
@@ -359,8 +574,7 @@ footer{background:var(--bg-footer);padding:22px clamp(24px,8vw,140px);display:fl
     </div>
     <!--
       FOTO — O MNĚ
-      Swap: <div class="about-img-ph">foto zde</div>
-      With: <img src="images/about/photo.webp" alt="Saskia Kafková" loading="lazy">
+      Swap .about-img-ph with: <img src="images/about/photo.webp" alt="Saskia Kafková" loading="lazy">
     -->
     <div class="about-img">
       <div class="about-img-ph">foto zde</div>
@@ -368,35 +582,15 @@ footer{background:var(--bg-footer);padding:22px clamp(24px,8vw,140px);display:fl
   </div>
 </section>
 
-<!-- ════════ ZKUŠENOSTI ════════ -->
-<section class="exp-section reveal" id="zkus">
-  <div class="exp-inner">
-    <p class="section-label"><span class="cs">Kariéra</span><span class="en" style="display:none">Career</span></p>
-    <h2 class="sec-h2"><span class="cs">Zkušenosti</span><span class="en" style="display:none">Experience</span></h2>
-    <p class="body-text">
-      <span class="cs">Lorem ipsum dolor sit amet consectetur adipiscing elit. Placerat in id cursus mi pretium tellus duis. Urna tempor pulvinar vivamus fringilla lacus nec metus.</span>
-      <span class="en" style="display:none">Lorem ipsum dolor sit amet consectetur adipiscing elit. Placerat in id cursus mi pretium tellus duis.</span>
-    </p>
-  </div>
-</section>
-
 <!-- ════════════════════════════════════════════════
      TETOVÁNÍ
      ────────────────────────────────────────────────
-     HOW TO ADD / REPLACE IMAGES:
+     Struktura: úvod → Abstraktní (3 techniky × 5 fotek)
+                      → Konkrétní (text + 5 fotek)
 
-     Desktop masonry — inside any .mitem, replace:
-       <div class="ph-tall"><div class="ph-lbl">foto N</div></div>
-     with:
-       <img src="images/tet/name.webp" alt="Popis" loading="lazy">
-
-     Mobile carousel — inside any .mob-cslide, replace:
-       <div class="mob-cslide-ph">foto N</div>
-     with:
-       <img src="images/tet/name.webp" alt="Popis" loading="lazy">
-
-     TO ADD MORE SLOTS: duplicate any .mitem (desktop) or
-     .mob-cslide (mobile) block. Carousel dots auto-update.
+     Přidat foto: v .sthumb nahraď <div class="ph"> za
+       <img src="images/tet/nazev.webp" alt="popis" loading="lazy">
+     a ve slide-main-img stejně (pro velký náhled).
 ════════════════════════════════════════════════ -->
 <section class="gallery-wrap reveal" id="tet">
   <div class="gallery-header">
@@ -404,79 +598,154 @@ footer{background:var(--bg-footer);padding:22px clamp(24px,8vw,140px);display:fl
       <p class="section-label"><span class="cs">Práce</span><span class="en" style="display:none">Work</span></p>
       <h2 class="sec-h2"><span class="cs">Tetování</span><span class="en" style="display:none">Tattoo</span></h2>
     </div>
-    <div class="gallery-filters">
-      <button class="fbtn on"><span class="cs">Vše</span><span class="en" style="display:none">All</span></button>
-      <button class="fbtn"><span class="cs">Linie</span><span class="en" style="display:none">Lines</span></button>
-      <button class="fbtn"><span class="cs">Rituální</span><span class="en" style="display:none">Ritual</span></button>
+  </div>
+  <div style="padding:0 clamp(24px,8vw,140px) 0; max-width:1200px;">
+    <p class="body-text" style="margin-bottom:0">
+      <span class="cs">Lorem ipsum dolor sit amet consectetur adipiscing elit. Urna tempor pulvinar vivamus fringilla lacus nec metus. Integer nunc posuere ut hendrerit semper.</span>
+      <span class="en" style="display:none">Lorem ipsum dolor sit amet consectetur adipiscing elit. Urna tempor pulvinar vivamus fringilla lacus nec metus.</span>
+    </p>
+  </div>
+
+  <!-- ABSTRAKTNÍ -->
+  <div class="gallery-subsec">
+    <span class="subsec-label"><span class="cs">Kategorie</span><span class="en" style="display:none">Category</span></span>
+    <h3 class="subsec-h3"><span class="cs">Abstraktní</span><span class="en" style="display:none">Abstract</span></h3>
+    <p class="subsec-body">
+      <span class="cs">Lorem ipsum dolor sit amet consectetur adipiscing elit. Urna tempor pulvinar vivamus fringilla lacus nec metus. Práce vycházející z intuice, pohybu a přírodnách forem.</span>
+      <span class="en" style="display:none">Lorem ipsum dolor sit amet consectetur adipiscing elit. Work rooted in intuition, movement, and natural forms.</span>
+    </p>
+
+    <!-- Technika: Touching -->
+    <div style="margin-bottom:52px">
+      <span class="subsec-label"><span class="cs">Technika</span><span class="en" style="display:none">Technique</span></span>
+      <h3 class="subsec-h3" style="font-size:clamp(1.2rem,2.5vw,1.7rem)"><span class="cs">Touching</span><span class="en" style="display:none">Touching</span></h3>
+      <p class="subsec-body">
+        <span class="cs">Jemná technika doteku — jehla se pohybuje jako prodloužení ruky, přenáší rytmus dechu do kůže.</span>
+        <span class="en" style="display:none">A delicate touch technique — the needle moves as an extension of the hand, transferring the rhythm of breath into skin.</span>
+      </p>
+      <div class="slideshow" id="ss-touching" style="padding:0">
+        <div class="slide-main" onclick="openLBSlide('ss-touching')">
+          <div class="slide-main-img active"><div class="ph" style="background:linear-gradient(160deg,#2a231a,#1e1a15)">foto 1</div></div>
+          <div class="slide-main-img"><div class="ph" style="background:linear-gradient(160deg,#2f2820,#231e18)">foto 2</div></div>
+          <div class="slide-main-img"><div class="ph" style="background:linear-gradient(160deg,#252018,#1a1714)">foto 3</div></div>
+          <div class="slide-main-img"><div class="ph" style="background:linear-gradient(160deg,#312920,#251f18)">foto 4</div></div>
+          <div class="slide-main-img"><div class="ph" style="background:linear-gradient(160deg,#28201a,#1c1814)">foto 5</div></div>
+          <div class="slide-caption">
+            <span class="slide-label" data-ss="ss-touching">Touching I</span>
+            <span class="slide-counter" data-counter="ss-touching">1 / 5</span>
+          </div>
+          <button class="slide-arrow prev" onclick="slideNav('ss-touching',-1,event)">&#8592;</button>
+          <button class="slide-arrow next" onclick="slideNav('ss-touching',1,event)">&#8594;</button>
+        </div>
+        <div class="slide-dots" id="dots-ss-touching"></div>
+        <div class="slide-thumbs" id="thumbs-ss-touching">
+          <div class="sthumb active" onclick="goSlide('ss-touching',0)"><div class="ph">1</div></div>
+          <div class="sthumb" onclick="goSlide('ss-touching',1)"><div class="ph">2</div></div>
+          <div class="sthumb" onclick="goSlide('ss-touching',2)"><div class="ph">3</div></div>
+          <div class="sthumb" onclick="goSlide('ss-touching',3)"><div class="ph">4</div></div>
+          <div class="sthumb" onclick="goSlide('ss-touching',4)"><div class="ph">5</div></div>
+        </div>
+      </div>
     </div>
-  </div>
 
-  <!-- DESKTOP 9-slot masonry -->
-  <div class="masonry">
-    <div class="mitem" onclick="openLB(this)"><div class="mimg-inner ph-tall" ><div class="ph-lbl">foto 1</div></div><div class="mov"><span class="mlabel">Linie I</span></div></div>
-    <div class="mitem" onclick="openLB(this)"><div class="mimg-inner ph-short"><div class="ph-lbl">foto 2</div></div><div class="mov"><span class="mlabel">Rituál II</span></div></div>
-    <div class="mitem" onclick="openLB(this)"><div class="mimg-inner ph-med"  ><div class="ph-lbl">foto 3</div></div><div class="mov"><span class="mlabel">Zemský III</span></div></div>
-    <div class="mitem" onclick="openLB(this)"><div class="mimg-inner ph-wide" ><div class="ph-lbl">foto 4</div></div><div class="mov"><span class="mlabel">Ticho IV</span></div></div>
-    <div class="mitem" onclick="openLB(this)"><div class="mimg-inner ph-tall" ><div class="ph-lbl">foto 5</div></div><div class="mov"><span class="mlabel">Dech V</span></div></div>
-    <div class="mitem" onclick="openLB(this)"><div class="mimg-inner ph-short"><div class="ph-lbl">foto 6</div></div><div class="mov"><span class="mlabel">Krev VI</span></div></div>
-    <div class="mitem" onclick="openLB(this)"><div class="mimg-inner ph-med"  ><div class="ph-lbl">foto 7</div></div><div class="mov"><span class="mlabel">Voda VII</span></div></div>
-    <div class="mitem" onclick="openLB(this)"><div class="mimg-inner ph-tall" ><div class="ph-lbl">foto 8</div></div><div class="mov"><span class="mlabel">Oheň VIII</span></div></div>
-    <div class="mitem" onclick="openLB(this)"><div class="mimg-inner ph-wide" ><div class="ph-lbl">foto 9</div></div><div class="mov"><span class="mlabel">Země IX</span></div></div>
-  </div>
-
-  <!-- MOBILE 9-slide carousel -->
-  <div class="mob-carousel-wrap">
-    <div class="mob-carousel" id="carTat">
-      <div class="mob-cslide"><div class="mob-cslide-ph">foto 1</div><div class="mob-cslide-ov"><span class="mob-cslide-label">Linie I</span></div></div>
-      <div class="mob-cslide"><div class="mob-cslide-ph">foto 2</div><div class="mob-cslide-ov"><span class="mob-cslide-label">Rituál II</span></div></div>
-      <div class="mob-cslide"><div class="mob-cslide-ph">foto 3</div><div class="mob-cslide-ov"><span class="mob-cslide-label">Zemský III</span></div></div>
-      <div class="mob-cslide"><div class="mob-cslide-ph">foto 4</div><div class="mob-cslide-ov"><span class="mob-cslide-label">Ticho IV</span></div></div>
-      <div class="mob-cslide"><div class="mob-cslide-ph">foto 5</div><div class="mob-cslide-ov"><span class="mob-cslide-label">Dech V</span></div></div>
-      <div class="mob-cslide"><div class="mob-cslide-ph">foto 6</div><div class="mob-cslide-ov"><span class="mob-cslide-label">Krev VI</span></div></div>
-      <div class="mob-cslide"><div class="mob-cslide-ph">foto 7</div><div class="mob-cslide-ov"><span class="mob-cslide-label">Voda VII</span></div></div>
-      <div class="mob-cslide"><div class="mob-cslide-ph">foto 8</div><div class="mob-cslide-ov"><span class="mob-cslide-label">Oheň VIII</span></div></div>
-      <div class="mob-cslide"><div class="mob-cslide-ph">foto 9</div><div class="mob-cslide-ov"><span class="mob-cslide-label">Země IX</span></div></div>
+    <!-- Technika: Peří -->
+    <div style="margin-bottom:52px">
+      <span class="subsec-label"><span class="cs">Technika</span><span class="en" style="display:none">Technique</span></span>
+      <h3 class="subsec-h3" style="font-size:clamp(1.2rem,2.5vw,1.7rem)"><span class="cs">Peří</span><span class="en" style="display:none">Feather</span></h3>
+      <p class="subsec-body">
+        <span class="cs">Práce s přirozenou strukturou pera — linie, které nesou lehkost a přesnost zároveň.</span>
+        <span class="en" style="display:none">Working with the natural structure of a feather — lines that carry both lightness and precision.</span>
+      </p>
+      <div class="slideshow" id="ss-peri" style="padding:0">
+        <div class="slide-main" onclick="openLBSlide('ss-peri')">
+          <div class="slide-main-img active"><div class="ph" style="background:linear-gradient(160deg,#2e2618,#1e1a15)">foto 1</div></div>
+          <div class="slide-main-img"><div class="ph" style="background:linear-gradient(160deg,#2a2318,#1c1a14)">foto 2</div></div>
+          <div class="slide-main-img"><div class="ph" style="background:linear-gradient(160deg,#302618,#221e15)">foto 3</div></div>
+          <div class="slide-main-img"><div class="ph" style="background:linear-gradient(160deg,#281e16,#1a1612)">foto 4</div></div>
+          <div class="slide-main-img"><div class="ph" style="background:linear-gradient(160deg,#2c2418,#201c14)">foto 5</div></div>
+          <div class="slide-caption">
+            <span class="slide-label" data-ss="ss-peri">Peří I</span>
+            <span class="slide-counter" data-counter="ss-peri">1 / 5</span>
+          </div>
+          <button class="slide-arrow prev" onclick="slideNav('ss-peri',-1,event)">&#8592;</button>
+          <button class="slide-arrow next" onclick="slideNav('ss-peri',1,event)">&#8594;</button>
+        </div>
+        <div class="slide-dots" id="dots-ss-peri"></div>
+        <div class="slide-thumbs" id="thumbs-ss-peri">
+          <div class="sthumb active" onclick="goSlide('ss-peri',0)"><div class="ph">1</div></div>
+          <div class="sthumb" onclick="goSlide('ss-peri',1)"><div class="ph">2</div></div>
+          <div class="sthumb" onclick="goSlide('ss-peri',2)"><div class="ph">3</div></div>
+          <div class="sthumb" onclick="goSlide('ss-peri',3)"><div class="ph">4</div></div>
+          <div class="sthumb" onclick="goSlide('ss-peri',4)"><div class="ph">5</div></div>
+        </div>
+      </div>
     </div>
-    <div class="carousel-dots" id="dotsTat"></div>
-  </div>
-</section>
 
-<!-- ════════ MALBY ════════ -->
-<section class="gallery-wrap light reveal" id="malby">
-  <div class="gallery-header">
+    <!-- Technika: Freehand -->
     <div>
-      <p class="section-label"><span class="cs">Tvorba</span><span class="en" style="display:none">Works</span></p>
-      <h2 class="sec-h2"><span class="cs">Malby</span><span class="en" style="display:none">Paintings</span></h2>
+      <span class="subsec-label"><span class="cs">Technika</span><span class="en" style="display:none">Technique</span></span>
+      <h3 class="subsec-h3" style="font-size:clamp(1.2rem,2.5vw,1.7rem)">Freehand</h3>
+      <p class="subsec-body">
+        <span class="cs">Kresba přímo na kůži, bez předlohy — každý výsledek je jedinečný a neopakovatelný.</span>
+        <span class="en" style="display:none">Drawing directly on skin, without a template — each result is unique and unrepeatable.</span>
+      </p>
+      <div class="slideshow" id="ss-freehand" style="padding:0">
+        <div class="slide-main" onclick="openLBSlide('ss-freehand')">
+          <div class="slide-main-img active"><div class="ph" style="background:linear-gradient(160deg,#261e16,#1a1612)">foto 1</div></div>
+          <div class="slide-main-img"><div class="ph" style="background:linear-gradient(160deg,#2c2018,#1e1a14)">foto 2</div></div>
+          <div class="slide-main-img"><div class="ph" style="background:linear-gradient(160deg,#221c14,#181410)">foto 3</div></div>
+          <div class="slide-main-img"><div class="ph" style="background:linear-gradient(160deg,#2e2418,#201c14)">foto 4</div></div>
+          <div class="slide-main-img"><div class="ph" style="background:linear-gradient(160deg,#281e14,#1c1812)">foto 5</div></div>
+          <div class="slide-caption">
+            <span class="slide-label" data-ss="ss-freehand">Freehand I</span>
+            <span class="slide-counter" data-counter="ss-freehand">1 / 5</span>
+          </div>
+          <button class="slide-arrow prev" onclick="slideNav('ss-freehand',-1,event)">&#8592;</button>
+          <button class="slide-arrow next" onclick="slideNav('ss-freehand',1,event)">&#8594;</button>
+        </div>
+        <div class="slide-dots" id="dots-ss-freehand"></div>
+        <div class="slide-thumbs" id="thumbs-ss-freehand">
+          <div class="sthumb active" onclick="goSlide('ss-freehand',0)"><div class="ph">1</div></div>
+          <div class="sthumb" onclick="goSlide('ss-freehand',1)"><div class="ph">2</div></div>
+          <div class="sthumb" onclick="goSlide('ss-freehand',2)"><div class="ph">3</div></div>
+          <div class="sthumb" onclick="goSlide('ss-freehand',3)"><div class="ph">4</div></div>
+          <div class="sthumb" onclick="goSlide('ss-freehand',4)"><div class="ph">5</div></div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- DESKTOP 9-slot masonry -->
-  <div class="masonry">
-    <div class="mitem" onclick="openLB(this)"><div class="mimg-inner ph-med"  ><div class="ph-lbl">malba 1</div></div><div class="mov"><span class="mlabel">Spolu I</span></div></div>
-    <div class="mitem" onclick="openLB(this)"><div class="mimg-inner ph-tall" ><div class="ph-lbl">malba 2</div></div><div class="mov"><span class="mlabel">Inkoust II</span></div></div>
-    <div class="mitem" onclick="openLB(this)"><div class="mimg-inner ph-short"><div class="ph-lbl">malba 3</div></div><div class="mov"><span class="mlabel">Tok III</span></div></div>
-    <div class="mitem" onclick="openLB(this)"><div class="mimg-inner ph-tall" ><div class="ph-lbl">malba 4</div></div><div class="mov"><span class="mlabel">Země IV</span></div></div>
-    <div class="mitem" onclick="openLB(this)"><div class="mimg-inner ph-wide" ><div class="ph-lbl">malba 5</div></div><div class="mov"><span class="mlabel">Tichá V</span></div></div>
-    <div class="mitem" onclick="openLB(this)"><div class="mimg-inner ph-med"  ><div class="ph-lbl">malba 6</div></div><div class="mov"><span class="mlabel">Prach VI</span></div></div>
-    <div class="mitem" onclick="openLB(this)"><div class="mimg-inner ph-short"><div class="ph-lbl">malba 7</div></div><div class="mov"><span class="mlabel">Dech VII</span></div></div>
-    <div class="mitem" onclick="openLB(this)"><div class="mimg-inner ph-tall" ><div class="ph-lbl">malba 8</div></div><div class="mov"><span class="mlabel">Oheň VIII</span></div></div>
-    <div class="mitem" onclick="openLB(this)"><div class="mimg-inner ph-med"  ><div class="ph-lbl">malba 9</div></div><div class="mov"><span class="mlabel">Voda IX</span></div></div>
-  </div>
-
-  <!-- MOBILE 9-slide carousel (wide ratio for paintings) -->
-  <div class="mob-carousel-wrap">
-    <div class="mob-carousel" id="carPaint">
-      <div class="mob-cslide wide"><div class="mob-cslide-ph">malba 1</div><div class="mob-cslide-ov"><span class="mob-cslide-label">Spolu I</span></div></div>
-      <div class="mob-cslide wide"><div class="mob-cslide-ph">malba 2</div><div class="mob-cslide-ov"><span class="mob-cslide-label">Inkoust II</span></div></div>
-      <div class="mob-cslide wide"><div class="mob-cslide-ph">malba 3</div><div class="mob-cslide-ov"><span class="mob-cslide-label">Tok III</span></div></div>
-      <div class="mob-cslide wide"><div class="mob-cslide-ph">malba 4</div><div class="mob-cslide-ov"><span class="mob-cslide-label">Země IV</span></div></div>
-      <div class="mob-cslide wide"><div class="mob-cslide-ph">malba 5</div><div class="mob-cslide-ov"><span class="mob-cslide-label">Tichá V</span></div></div>
-      <div class="mob-cslide wide"><div class="mob-cslide-ph">malba 6</div><div class="mob-cslide-ov"><span class="mob-cslide-label">Prach VI</span></div></div>
-      <div class="mob-cslide wide"><div class="mob-cslide-ph">malba 7</div><div class="mob-cslide-ov"><span class="mob-cslide-label">Dech VII</span></div></div>
-      <div class="mob-cslide wide"><div class="mob-cslide-ph">malba 8</div><div class="mob-cslide-ov"><span class="mob-cslide-label">Oheň VIII</span></div></div>
-      <div class="mob-cslide wide"><div class="mob-cslide-ph">malba 9</div><div class="mob-cslide-ov"><span class="mob-cslide-label">Voda IX</span></div></div>
+  <!-- KONKRÉTNÍ -->
+  <div class="gallery-subsec">
+    <span class="subsec-label"><span class="cs">Kategorie</span><span class="en" style="display:none">Category</span></span>
+    <h3 class="subsec-h3"><span class="cs">Konkrétní</span><span class="en" style="display:none">Figurative</span></h3>
+    <p class="subsec-body">
+      <span class="cs">Lorem ipsum dolor sit amet consectetur adipiscing elit. Urna tempor pulvinar vivamus fringilla lacus nec metus. Práce s konkrétními motivy, přírodou, tělem a symbolikou.</span>
+      <span class="en" style="display:none">Lorem ipsum dolor sit amet consectetur adipiscing elit. Work with concrete motifs, nature, body, and symbolism.</span>
+    </p>
+    <div class="slideshow" id="ss-konkretni" style="padding:0">
+      <div class="slide-main" onclick="openLBSlide('ss-konkretni')">
+        <div class="slide-main-img active"><div class="ph" style="background:linear-gradient(160deg,#2a231a,#1e1a15)">foto 1</div></div>
+        <div class="slide-main-img"><div class="ph" style="background:linear-gradient(160deg,#2f2820,#231e18)">foto 2</div></div>
+        <div class="slide-main-img"><div class="ph" style="background:linear-gradient(160deg,#252018,#1a1714)">foto 3</div></div>
+        <div class="slide-main-img"><div class="ph" style="background:linear-gradient(160deg,#312920,#251f18)">foto 4</div></div>
+        <div class="slide-main-img"><div class="ph" style="background:linear-gradient(160deg,#28201a,#1c1814)">foto 5</div></div>
+        <div class="slide-caption">
+          <span class="slide-label" data-ss="ss-konkretni">Konkrétní I</span>
+          <span class="slide-counter" data-counter="ss-konkretni">1 / 5</span>
+        </div>
+        <button class="slide-arrow prev" onclick="slideNav('ss-konkretni',-1,event)">&#8592;</button>
+        <button class="slide-arrow next" onclick="slideNav('ss-konkretni',1,event)">&#8594;</button>
+      </div>
+      <div class="slide-dots" id="dots-ss-konkretni"></div>
+      <div class="slide-thumbs" id="thumbs-ss-konkretni">
+        <div class="sthumb active" onclick="goSlide('ss-konkretni',0)"><div class="ph">1</div></div>
+        <div class="sthumb" onclick="goSlide('ss-konkretni',1)"><div class="ph">2</div></div>
+        <div class="sthumb" onclick="goSlide('ss-konkretni',2)"><div class="ph">3</div></div>
+        <div class="sthumb" onclick="goSlide('ss-konkretni',3)"><div class="ph">4</div></div>
+        <div class="sthumb" onclick="goSlide('ss-konkretni',4)"><div class="ph">5</div></div>
+      </div>
     </div>
-    <div class="carousel-dots" id="dotsPaint"></div>
   </div>
 </section>
 
@@ -503,6 +772,124 @@ footer{background:var(--bg-footer);padding:22px clamp(24px,8vw,140px);display:fl
       <div class="rnum">03</div>
       <h3><span class="cs">Tvorba spolu</span><span class="en" style="display:none">Together</span></h3>
       <p><span class="cs">Skupinová setkání, kde vzniká něco nového.</span><span class="en" style="display:none">Group gatherings where something new emerges.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     MALBY
+     Struktura: úvod → Obecné malby (text + 5 fotek)
+                      → Plenér (text + 5 fotek)
+════════════════════════════════════════════════ -->
+<section class="gallery-wrap light reveal" id="malby">
+  <div class="gallery-header">
+    <div>
+      <p class="section-label"><span class="cs">Tvorba</span><span class="en" style="display:none">Works</span></p>
+      <h2 class="sec-h2"><span class="cs">Malby</span><span class="en" style="display:none">Paintings</span></h2>
+    </div>
+  </div>
+  <div style="padding:0 clamp(24px,8vw,140px) 0">
+    <p class="body-text" style="margin-bottom:0">
+      <span class="cs">Lorem ipsum dolor sit amet consectetur adipiscing elit. Urna tempor pulvinar vivamus fringilla lacus nec metus. Tvorba na rozhraní těla, symbolu a krajiny.</span>
+      <span class="en" style="display:none">Lorem ipsum dolor sit amet consectetur adipiscing elit. Creation at the intersection of body, symbol, and landscape.</span>
+    </p>
+  </div>
+
+  <!-- Obecné malby -->
+  <div class="gallery-subsec">
+    <span class="subsec-label"><span class="cs">Téma</span><span class="en" style="display:none">Theme</span></span>
+    <h3 class="subsec-h3"><span class="cs">Obecné malby</span><span class="en" style="display:none">General paintings</span></h3>
+    <p class="subsec-body">
+      <span class="cs">Lorem ipsum dolor sit amet consectetur adipiscing elit. Urna tempor pulvinar vivamus fringilla lacus nec metus. Inkoust, pigment, zemina — materiály s vlastní pamětí.</span>
+      <span class="en" style="display:none">Lorem ipsum dolor sit amet consectetur adipiscing elit. Ink, pigment, earth — materials with their own memory.</span>
+    </p>
+    <div class="slideshow" id="ss-malby" style="padding:0">
+      <div class="slide-main" onclick="openLBSlide('ss-malby')">
+        <div class="slide-main-img active"><div class="ph" style="background:linear-gradient(160deg,#2a231a,#1e1a15)">malba 1</div></div>
+        <div class="slide-main-img"><div class="ph" style="background:linear-gradient(160deg,#2f2820,#231e18)">malba 2</div></div>
+        <div class="slide-main-img"><div class="ph" style="background:linear-gradient(160deg,#252018,#1a1714)">malba 3</div></div>
+        <div class="slide-main-img"><div class="ph" style="background:linear-gradient(160deg,#312920,#251f18)">malba 4</div></div>
+        <div class="slide-main-img"><div class="ph" style="background:linear-gradient(160deg,#28201a,#1c1814)">malba 5</div></div>
+        <div class="slide-caption">
+          <span class="slide-label" data-ss="ss-malby">Spolu I</span>
+          <span class="slide-counter" data-counter="ss-malby">1 / 5</span>
+        </div>
+        <button class="slide-arrow prev" onclick="slideNav('ss-malby',-1,event)">&#8592;</button>
+        <button class="slide-arrow next" onclick="slideNav('ss-malby',1,event)">&#8594;</button>
+      </div>
+      <div class="slide-dots" id="dots-ss-malby"></div>
+      <div class="slide-thumbs" id="thumbs-ss-malby">
+        <div class="sthumb active" onclick="goSlide('ss-malby',0)"><div class="ph">1</div></div>
+        <div class="sthumb" onclick="goSlide('ss-malby',1)"><div class="ph">2</div></div>
+        <div class="sthumb" onclick="goSlide('ss-malby',2)"><div class="ph">3</div></div>
+        <div class="sthumb" onclick="goSlide('ss-malby',3)"><div class="ph">4</div></div>
+        <div class="sthumb" onclick="goSlide('ss-malby',4)"><div class="ph">5</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Plenér -->
+  <div class="gallery-subsec">
+    <span class="subsec-label"><span class="cs">Téma</span><span class="en" style="display:none">Theme</span></span>
+    <h3 class="subsec-h3"><span class="cs">Plenér</span><span class="en" style="display:none">Plein air</span></h3>
+    <p class="subsec-body">
+      <span class="cs">Lorem ipsum dolor sit amet consectetur adipiscing elit. Malba venku, v přímém kontaktu s krajinou, světlem a větrem.</span>
+      <span class="en" style="display:none">Lorem ipsum dolor sit amet consectetur adipiscing elit. Painting outdoors, in direct contact with landscape, light, and wind.</span>
+    </p>
+    <div class="slideshow" id="ss-plener" style="padding:0">
+      <div class="slide-main" onclick="openLBSlide('ss-plener')">
+        <div class="slide-main-img active"><div class="ph" style="background:linear-gradient(160deg,#2c2418,#1e1a14)">plenér 1</div></div>
+        <div class="slide-main-img"><div class="ph" style="background:linear-gradient(160deg,#2a2218,#1c1a13)">plenér 2</div></div>
+        <div class="slide-main-img"><div class="ph" style="background:linear-gradient(160deg,#2e2618,#201c14)">plenér 3</div></div>
+        <div class="slide-main-img"><div class="ph" style="background:linear-gradient(160deg,#261e16,#1a1612)">plenér 4</div></div>
+        <div class="slide-main-img"><div class="ph" style="background:linear-gradient(160deg,#302618,#221e15)">plenér 5</div></div>
+        <div class="slide-caption">
+          <span class="slide-label" data-ss="ss-plener">Plenér I</span>
+          <span class="slide-counter" data-counter="ss-plener">1 / 5</span>
+        </div>
+        <button class="slide-arrow prev" onclick="slideNav('ss-plener',-1,event)">&#8592;</button>
+        <button class="slide-arrow next" onclick="slideNav('ss-plener',1,event)">&#8594;</button>
+      </div>
+      <div class="slide-dots" id="dots-ss-plener"></div>
+      <div class="slide-thumbs" id="thumbs-ss-plener">
+        <div class="sthumb active" onclick="goSlide('ss-plener',0)"><div class="ph">1</div></div>
+        <div class="sthumb" onclick="goSlide('ss-plener',1)"><div class="ph">2</div></div>
+        <div class="sthumb" onclick="goSlide('ss-plener',2)"><div class="ph">3</div></div>
+        <div class="sthumb" onclick="goSlide('ss-plener',3)"><div class="ph">4</div></div>
+        <div class="sthumb" onclick="goSlide('ss-plener',4)"><div class="ph">5</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ VÝSTAVY ════════ -->
+<section class="exhibitions-sec reveal" id="vystava">
+  <div class="exh-inner">
+    <p class="section-label"><span class="cs">Výstavní činnost</span><span class="en" style="display:none">Exhibition activity</span></p>
+    <h2 class="sec-h2"><span class="cs">Výstavy</span><span class="en" style="display:none">Exhibitions</span></h2>
+    <p class="body-text">
+      <span class="cs">Lorem ipsum dolor sit amet consectetur. Urna tempor pulvinar vivamus fringilla lacus.</span>
+      <span class="en" style="display:none">Lorem ipsum dolor sit amet consectetur. Urna tempor pulvinar vivamus fringilla lacus.</span>
+    </p>
+    <!--
+      VÝSTAVY — přidat další výstavu: zkopírovat .exh-item blok
+    -->
+    <div class="exh-list">
+      <div class="exh-item">
+        <span class="exh-date">2024</span>
+        <span class="exh-title"><span class="cs">Název výstavy — skupinová</span><span class="en" style="display:none">Exhibition title — group</span></span>
+        <span class="exh-place"><span class="cs">Galerie, Praha</span><span class="en" style="display:none">Gallery, Prague</span></span>
+      </div>
+      <div class="exh-item">
+        <span class="exh-date">2023</span>
+        <span class="exh-title"><span class="cs">Název výstavy — samostatná</span><span class="en" style="display:none">Exhibition title — solo</span></span>
+        <span class="exh-place"><span class="cs">Ateliér, Brno</span><span class="en" style="display:none">Studio, Brno</span></span>
+      </div>
+      <div class="exh-item">
+        <span class="exh-date">2022</span>
+        <span class="exh-title"><span class="cs">Název výstavy — skupinová</span><span class="en" style="display:none">Exhibition title — group</span></span>
+        <span class="exh-place"><span class="cs">Galerie, Praha</span><span class="en" style="display:none">Gallery, Prague</span></span>
+      </div>
     </div>
   </div>
 </section>
@@ -547,7 +934,95 @@ footer{background:var(--bg-footer);padding:22px clamp(24px,8vw,140px);display:fl
 </div>
 
 <script>
-/* ── DESKTOP NAV ── */
+/* ══════════════════════════════════════
+   SLIDESHOW ENGINE
+   State per slideshow id.
+══════════════════════════════════════ */
+const ssState = {};
+
+function initSlideshow(id) {
+  const wrap = document.getElementById(id);
+  if (!wrap) return;
+  const slides = wrap.querySelectorAll('.slide-main-img');
+  const dotsWrap = document.getElementById('dots-' + id);
+  const thumbsWrap = document.getElementById('thumbs-' + id);
+  const total = slides.length;
+  ssState[id] = { cur: 0, total };
+
+  // Build dots
+  if (dotsWrap) {
+    dotsWrap.innerHTML = '';
+    for (let i = 0; i < total; i++) {
+      const d = document.createElement('button');
+      d.className = 'sdot' + (i === 0 ? ' on' : '');
+      d.setAttribute('aria-label', 'Slide ' + (i + 1));
+      d.addEventListener('click', () => goSlide(id, i));
+      dotsWrap.appendChild(d);
+    }
+  }
+
+  // Labels — collect from data-ss attribute spans
+  const labelEls = wrap.querySelectorAll('[data-ss="' + id + '"]');
+  ssState[id].labels = [];
+  slides.forEach((sl, i) => {
+    // try to get label from ph text
+    const ph = sl.querySelector('.ph');
+    ssState[id].labels[i] = ph ? ph.textContent.trim() : (i + 1);
+  });
+}
+
+function goSlide(id, idx) {
+  const wrap = document.getElementById(id);
+  const st = ssState[id];
+  if (!wrap || !st) return;
+  const slides = wrap.querySelectorAll('.slide-main-img');
+  const thumbs = document.getElementById('thumbs-' + id);
+  const dotsWrap = document.getElementById('dots-' + id);
+
+  slides[st.cur].classList.remove('active');
+  if (thumbs) thumbs.querySelectorAll('.sthumb')[st.cur]?.classList.remove('active');
+  if (dotsWrap) dotsWrap.querySelectorAll('.sdot')[st.cur]?.classList.remove('on');
+
+  st.cur = ((idx % st.total) + st.total) % st.total;
+
+  slides[st.cur].classList.add('active');
+  if (thumbs) thumbs.querySelectorAll('.sthumb')[st.cur]?.classList.add('active');
+  if (dotsWrap) dotsWrap.querySelectorAll('.sdot')[st.cur]?.classList.add('on');
+
+  // Update caption label
+  const labelEl = wrap.querySelector('[data-ss="' + id + '"]');
+  if (labelEl && st.labels[st.cur]) labelEl.textContent = st.labels[st.cur];
+
+  // Update counter
+  const counter = wrap.querySelector('[data-counter="' + id + '"]');
+  if (counter) counter.textContent = (st.cur + 1) + ' / ' + st.total;
+}
+
+function slideNav(id, dir, e) {
+  if (e) e.stopPropagation();
+  const st = ssState[id];
+  if (!st) return;
+  goSlide(id, st.cur + dir);
+}
+
+function openLBSlide(id) {
+  const wrap = document.getElementById(id);
+  const st = ssState[id];
+  if (!wrap || !st) return;
+  const active = wrap.querySelectorAll('.slide-main-img')[st.cur];
+  const img = active?.querySelector('img');
+  const li = document.getElementById('lbImg');
+  if (img) { li.src = img.src; li.style.display = ''; }
+  else { li.style.display = 'none'; }
+  document.getElementById('lb').classList.add('on');
+}
+
+// Init all slideshows
+['ss-touching','ss-peri','ss-freehand','ss-konkretni','ss-malby','ss-plener'].forEach(initSlideshow);
+
+/* ══════════════════════════════════════
+   DESKTOP NAV
+══════════════════════════════════════ */
 const nt = document.getElementById('navTrigger');
 let navOpen = false;
 nt.addEventListener('click', () => {
@@ -555,16 +1030,20 @@ nt.addEventListener('click', () => {
   document.body.classList.toggle('nav-open', navOpen);
 });
 document.querySelectorAll('.nav-links a').forEach(a => {
-  a.addEventListener('click', function(e){
-    e.preventDefault();
+  a.addEventListener('click', function(e) {
     const href = this.getAttribute('href');
+    // External page — allow normal navigation
+    if (!href.startsWith('#')) { navOpen = false; document.body.classList.remove('nav-open'); return; }
+    e.preventDefault();
     navOpen = false;
     document.body.classList.remove('nav-open');
     setTimeout(() => { document.querySelector(href)?.scrollIntoView({behavior:'smooth'}); }, 400);
   });
 });
 
-/* ── MOBILE NAV ── */
+/* ══════════════════════════════════════
+   MOBILE NAV
+══════════════════════════════════════ */
 const mobTrig     = document.getElementById('mobNavTrigger');
 const mobBackdrop = document.getElementById('mobNavBackdrop');
 let mobNavOpen = false;
@@ -574,78 +1053,52 @@ mobTrig?.addEventListener('click', () => {
 });
 mobBackdrop?.addEventListener('click', closeMobNav);
 document.querySelectorAll('.mncard').forEach(c => {
-  c.addEventListener('click', function(e){
-    e.preventDefault();
+  c.addEventListener('click', function(e) {
     const href = this.getAttribute('href');
+    if (!href.startsWith('#')) { closeMobNav(); return; }
+    e.preventDefault();
     closeMobNav();
     setTimeout(() => { document.querySelector(href)?.scrollIntoView({behavior:'smooth'}); }, 360);
   });
 });
-function closeMobNav(){ mobNavOpen = false; document.body.classList.remove('mob-nav-open'); }
+function closeMobNav() { mobNavOpen = false; document.body.classList.remove('mob-nav-open'); }
 
-/* ── ESC ── */
+/* ══════════════════════════════════════
+   ESC
+══════════════════════════════════════ */
 document.addEventListener('keydown', e => {
-  if(e.key === 'Escape'){ navOpen = false; document.body.classList.remove('nav-open'); closeMobNav(); closeLB(); }
+  if (e.key === 'Escape') {
+    navOpen = false; document.body.classList.remove('nav-open');
+    closeMobNav(); closeLB();
+  }
 });
 
-/* ── LANG ── */
-function setLang(l){
-  document.querySelectorAll('.cs').forEach(el => el.style.display = l==='cs' ? '' : 'none');
-  document.querySelectorAll('.en').forEach(el => el.style.display = l==='en' ? '' : 'none');
+/* ══════════════════════════════════════
+   LANG
+══════════════════════════════════════ */
+function setLang(l) {
+  document.querySelectorAll('.cs').forEach(el => el.style.display = l === 'cs' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = l === 'en' ? '' : 'none');
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
   document.querySelector(`.lang-btn[onclick="setLang('${l}')"]`).classList.add('active');
 }
 
-/* ── LIGHTBOX ── */
-function openLB(el){
-  const img = el?.querySelector('img');
-  const li  = document.getElementById('lbImg');
-  li.src = img ? img.src : '';
-  li.style.display = img ? '' : 'none';
-  document.getElementById('lb').classList.add('on');
-}
-function closeLB(){ document.getElementById('lb').classList.remove('on'); }
+/* ══════════════════════════════════════
+   LIGHTBOX
+══════════════════════════════════════ */
+function closeLB() { document.getElementById('lb').classList.remove('on'); }
 
-/* ── CAROUSEL (auto-builds dots, supports drag) ── */
-function initCarousel(cid, did){
-  const car   = document.getElementById(cid);
-  const dotsW = document.getElementById(did);
-  if(!car || !dotsW) return;
-  const slides = car.querySelectorAll('.mob-cslide');
-  slides.forEach((_, i) => {
-    const d = document.createElement('div');
-    d.className = 'cdot' + (i===0 ? ' on' : '');
-    dotsW.appendChild(d);
-  });
-  const dots = dotsW.querySelectorAll('.cdot');
-  const upd = () => {
-    if(!slides[0]) return;
-    const idx = Math.round(car.scrollLeft / (slides[0].offsetWidth + 12));
-    dots.forEach((d,i) => d.classList.toggle('on', i===idx));
-  };
-  car.addEventListener('scroll', upd, {passive:true});
-  let down=false, sx, ss;
-  car.addEventListener('mousedown',  e => { down=true;  car.classList.add('grabbing');    sx=e.pageX-car.offsetLeft; ss=car.scrollLeft; });
-  car.addEventListener('mouseleave', () => { down=false; car.classList.remove('grabbing'); });
-  car.addEventListener('mouseup',    () => { down=false; car.classList.remove('grabbing'); });
-  car.addEventListener('mousemove',  e => { if(!down) return; e.preventDefault(); car.scrollLeft = ss-(e.pageX-car.offsetLeft-sx)*1.2; });
-}
-initCarousel('carTat',   'dotsTat');
-initCarousel('carPaint', 'dotsPaint');
-
-/* ── FILTER BUTTONS ── */
-document.querySelectorAll('.fbtn').forEach(b => b.addEventListener('click', function(){
-  this.closest('.gallery-filters').querySelectorAll('.fbtn').forEach(x => x.classList.remove('on'));
-  this.classList.add('on');
-}));
-
-/* ── SCROLL REVEAL ── */
+/* ══════════════════════════════════════
+   SCROLL REVEAL
+══════════════════════════════════════ */
 const obs = new IntersectionObserver(es => es.forEach(e => {
-  if(e.isIntersecting) e.target.classList.add('vis');
+  if (e.isIntersecting) e.target.classList.add('vis');
 }), {threshold:.07});
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-/* ── YEAR ── */
+/* ══════════════════════════════════════
+   YEAR
+══════════════════════════════════════ */
 document.getElementById('yr').textContent = new Date().getFullYear();
 </script>
 </body>
