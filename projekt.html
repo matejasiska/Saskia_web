@@ -68,7 +68,7 @@ body{background:var(--bg);color:var(--ink);font-family:'Jost',sans-serif;font-we
 .nav-overlay::before{content:'';position:absolute;top:18px;right:22px;width:var(--nav-size);height:var(--nav-size);background:var(--bg-surface);border-radius:50%;transform:scale(0);transition:transform .7s cubic-bezier(.77,0,.175,1)}
 .nav-open .nav-overlay{pointer-events:all}
 .nav-open .nav-overlay::before{transform:scale(80)}
-.nav-artwork{position:absolute;inset:0;background-image:url('images/Background/Spolu.jpeg');background-size:cover;background-position:center 30%;opacity:0;mix-blend-mode:luminosity;transition:opacity .5s .3s;pointer-events:none}
+.nav-artwork{position:absolute;inset:0;background-image:url('images/Background/Block.jpeg');background-size:cover;background-position:center 30%;opacity:0;mix-blend-mode:luminosity;transition:opacity .5s .3s;pointer-events:none}
 .nav-open .nav-artwork{opacity:.17}
 .nav-links{position:relative;z-index:2;padding-right:80px;display:flex;flex-direction:column;gap:4px;align-items:flex-end;opacity:0;transform:translateX(20px);transition:opacity .2s,transform .3s}
 .nav-open .nav-links{opacity:1;transform:translateX(0);transition:opacity .4s .4s,transform .4s .4s}
@@ -258,7 +258,7 @@ footer{background:var(--bg-footer);padding:22px clamp(24px,8vw,140px);display:fl
 </div>
 
 <!-- BACK ARROW -->
-<a class="back-btn" href="images/backup/index.html">
+<a class="back-btn" href="index.html">
   <svg viewBox="0 0 16 16"><polyline points="10 2 4 8 10 14"/></svg>
   <span class="cs">Zpět</span><span class="en" style="display:none">Back</span>
 </a>
@@ -270,13 +270,13 @@ footer{background:var(--bg-footer);padding:22px clamp(24px,8vw,140px);display:fl
 <div class="nav-overlay" id="navOverlay">
   <div class="nav-artwork"></div>
   <nav class="nav-links">
-    <a href="images/backup/index.html#omne"><span class="cs">Něco o mně</span><span class="en" style="display:none">About me</span></a>
-    <a href="images/backup/index.html#tet"><span class="cs">Tetování</span><span class="en" style="display:none">Tattoo</span></a>
-    <a href="images/backup/index.html#rit"><span class="cs">Rituály</span><span class="en" style="display:none">Rituals</span></a>
-    <a href="images/backup/index.html#malby"><span class="cs">Malby</span><span class="en" style="display:none">Paintings</span></a>
+    <a href="index.html#omne"><span class="cs">Něco o mně</span><span class="en" style="display:none">About me</span></a>
+    <a href="index.html#tet"><span class="cs">Tetování</span><span class="en" style="display:none">Tattoo</span></a>
+    <a href="index.html#rit"><span class="cs">Rituály</span><span class="en" style="display:none">Rituals</span></a>
+    <a href="index.html#malby"><span class="cs">Malby</span><span class="en" style="display:none">Paintings</span></a>
     <a href="projekt.html" class="nav-active"><span class="cs">Jiné projekty</span><span class="en" style="display:none">Other projects</span></a>
-    <a href="images/backup/index.html#vystava"><span class="cs">Výstavy</span><span class="en" style="display:none">Exhibitions</span></a>
-    <a href="images/backup/index.html#kontakt"><span class="cs">Kontakt</span><span class="en" style="display:none">Contact</span></a>
+    <a href="index.html#vystava"><span class="cs">Výstavy</span><span class="en" style="display:none">Exhibitions</span></a>
+    <a href="index.html#kontakt"><span class="cs">Kontakt</span><span class="en" style="display:none">Contact</span></a>
   </nav>
 </div>
 
@@ -284,13 +284,13 @@ footer{background:var(--bg-footer);padding:22px clamp(24px,8vw,140px);display:fl
 <div class="mob-nav-stack" id="mobNavStack">
   <div class="mob-nav-backdrop" id="mobNavBackdrop"></div>
   <div class="mob-nav-cards">
-    <a class="mncard" href="images/backup/index.html#omne"><span class="mncard-label"><span class="cs">Něco o mně</span><span class="en" style="display:none">About me</span></span><span class="mncard-num">01</span></a>
-    <a class="mncard" href="images/backup/index.html#tet"><span class="mncard-label"><span class="cs">Tetování</span><span class="en" style="display:none">Tattoo</span></span><span class="mncard-num">02</span></a>
-    <a class="mncard" href="images/backup/index.html#rit"><span class="mncard-label"><span class="cs">Rituály</span><span class="en" style="display:none">Rituals</span></span><span class="mncard-num">03</span></a>
-    <a class="mncard" href="images/backup/index.html#malby"><span class="mncard-label"><span class="cs">Malby</span><span class="en" style="display:none">Paintings</span></span><span class="mncard-num">04</span></a>
+    <a class="mncard" href="index.html#omne"><span class="mncard-label"><span class="cs">Něco o mně</span><span class="en" style="display:none">About me</span></span><span class="mncard-num">01</span></a>
+    <a class="mncard" href="index.html#tet"><span class="mncard-label"><span class="cs">Tetování</span><span class="en" style="display:none">Tattoo</span></span><span class="mncard-num">02</span></a>
+    <a class="mncard" href="index.html#rit"><span class="mncard-label"><span class="cs">Rituály</span><span class="en" style="display:none">Rituals</span></span><span class="mncard-num">03</span></a>
+    <a class="mncard" href="index.html#malby"><span class="mncard-label"><span class="cs">Malby</span><span class="en" style="display:none">Paintings</span></span><span class="mncard-num">04</span></a>
     <a class="mncard" href="projekt.html"><span class="mncard-label"><span class="cs">Jiné projekty</span><span class="en" style="display:none">Other projects</span></span><span class="mncard-num">05</span></a>
-    <a class="mncard" href="images/backup/index.html#vystava"><span class="mncard-label"><span class="cs">Výstavy</span><span class="en" style="display:none">Exhibitions</span></span><span class="mncard-num">06</span></a>
-    <a class="mncard" href="images/backup/index.html#kontakt"><span class="mncard-label"><span class="cs">Kontakt</span><span class="en" style="display:none">Contact</span></span><span class="mncard-num">07</span></a>
+    <a class="mncard" href="index.html#vystava"><span class="mncard-label"><span class="cs">Výstavy</span><span class="en" style="display:none">Exhibitions</span></span><span class="mncard-num">06</span></a>
+    <a class="mncard" href="index.html#kontakt"><span class="mncard-label"><span class="cs">Kontakt</span><span class="en" style="display:none">Contact</span></span><span class="mncard-num">07</span></a>
   </div>
   <button class="mob-nav-trigger" id="mobNavTrigger" aria-label="Menu">
     <div class="mlines"><span></span><span></span><span></span></div>
