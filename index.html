@@ -152,8 +152,6 @@
            SECTION PRIMITIVES
         ═══════════════════════════════════════════ */
         .section{padding:clamp(60px,10vw,110px) clamp(24px,8vw,140px);max-width:1200px;margin:0 auto}
-        /* Full-bleed sections — same padding as gallery, no max-width centering */
-        .section-full{padding:clamp(60px,10vw,110px) clamp(24px,8vw,140px)}
         .section-label{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:12px;display:flex;align-items:center;gap:16px}
         .section-label::after{content:'';flex:0 0 36px;height:1px;background:var(--gold-dim)}
 
@@ -333,19 +331,14 @@
         .rcard p{font-size:.88rem;color:var(--ink-muted);line-height:1.7;font-family:'Jost',sans-serif;font-weight:300}
 
         /* ═══════════════════════════════════════════
-           EXHIBITIONS — Výstavy
+           VÝSTAVY / EXH tabulka — sdílené styly
         ═══════════════════════════════════════════ */
-        .exhibitions-sec{
-            padding:clamp(60px,10vw,110px) clamp(24px,8vw,140px);
-            background:var(--bg-surface);
-        }
-        .exh-list{margin-top:44px;display:flex;flex-direction:column;gap:0}
+        .exh-list{margin-top:28px;display:flex;flex-direction:column;gap:0}
         .exh-item{
             display:grid;grid-template-columns:120px 1fr auto;
             gap:32px;align-items:baseline;
-            padding:22px 0;
+            padding:20px 0;
             border-bottom:1px solid var(--border);
-            transition:background .3s;
         }
         .exh-item:first-child{border-top:1px solid var(--border)}
         .exh-date{
@@ -359,9 +352,11 @@
             color:var(--ink);line-height:1.4;
         }
         .exh-place{
-            font-size:10px;letter-spacing:.18em;text-transform:uppercase;
-            color:var(--gold-dim);font-family:'Jost',sans-serif;
+            font-size:1rem;
+            color:var(--gold);font-family:'Cormorant Garamond',serif;
+            font-style:italic;
             text-align:right;
+            opacity:.85;
         }
 
         /* ═══════════════════════════════════════════
@@ -409,6 +404,52 @@
         .lb-close:hover{opacity:1}
 
         /* ═══════════════════════════════════════════
+           ZKUŠENOSTI — Studium + Výstavy + Rezidence
+        ═══════════════════════════════════════════ */
+        .zkusenosti-sec{
+            padding:clamp(60px,10vw,110px) clamp(24px,8vw,140px);
+            background:var(--bg);
+        }
+        .zkusenosti-inner{max-width:1200px;margin:0 auto}
+
+        .studium-grid{
+            margin-top:44px;
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:48px;
+            margin-bottom:72px;
+        }
+        .studium-item{
+            padding:28px 0;
+            border-top:1px solid var(--border);
+        }
+        .studium-period{
+            font-family:'Cormorant Garamond',serif;
+            font-size:1rem;font-style:italic;
+            color:var(--gold);opacity:.7;
+            margin-bottom:8px;display:block;
+        }
+        .studium-name{
+            font-family:'Cormorant Garamond',serif;
+            font-size:1.15rem;font-weight:600;
+            color:var(--ink);line-height:1.3;
+            margin-bottom:6px;
+        }
+        .studium-detail{
+            font-family:'Cormorant Garamond',serif;
+            font-size:.98rem;font-style:italic;
+            color:var(--ink-muted);line-height:1.6;
+        }
+
+        @media(max-width:860px){
+            .studium-grid{grid-template-columns:1fr;gap:0}
+        }
+        @media(max-width:600px){
+            .zkusenosti-sec{padding:40px 22px}
+            .studium-grid{margin-bottom:48px}
+        }
+
+        /* ═══════════════════════════════════════════
            REVEAL
         ═══════════════════════════════════════════ */
         .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s,transform .8s}
@@ -440,7 +481,6 @@
             .hero{height:58vh;min-height:300px;max-height:460px;padding:0 22px 28px}
             .scroll-hint{display:none}
             .section{padding:40px 22px}
-            .section-full{padding:40px 22px}
             .body-text{max-width:100%;font-size:1.05rem}
             .about-grid{gap:28px}
             .about-img{border-radius:10px}
@@ -460,39 +500,40 @@
             .lb-close{top:18px;right:18px}
             .exh-item{grid-template-columns:1fr;gap:4px;padding:16px 0}
             .exh-place{text-align:left}
-            .exhibitions-sec{padding:40px 22px}
+            .zkusenosti-sec{padding:40px 22px}
         }
 
         /* ═══════════════════════════════════════════
            MOBILE CARD-STACK NAV
         ═══════════════════════════════════════════ */
-        .mob-nav-stack{display:none;position:fixed;bottom:calc(22px + var(--safe-bottom));right:18px;z-index:300;width:60px;height:60px}
-        .mob-nav-trigger{position:absolute;bottom:0;right:0;width:56px;height:56px;background:var(--ink);border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(8,6,4,.55);transition:transform .4s cubic-bezier(.34,1.56,.64,1);z-index:2}
+        .mob-nav-stack{display:none;position:fixed;bottom:calc(28px + var(--safe-bottom));right:20px;z-index:300;width:64px;height:64px}
+        .mob-nav-trigger{position:absolute;bottom:0;right:0;width:60px;height:60px;background:var(--ink);border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 28px rgba(8,6,4,.6);transition:transform .4s cubic-bezier(.34,1.56,.64,1),box-shadow .3s;z-index:2}
+        .mob-nav-trigger:hover{box-shadow:0 8px 32px rgba(8,6,4,.7)}
         .mob-nav-trigger:active{transform:scale(.92)}
-        .mob-nav-trigger .mlines{display:flex;flex-direction:column;gap:4px}
-        .mob-nav-trigger .mlines span{display:block;width:16px;height:1.5px;background:var(--bg);transition:all .4s cubic-bezier(.23,1,.32,1);transform-origin:center}
-        .mob-nav-open .mob-nav-trigger .mlines span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
+        .mob-nav-trigger .mlines{display:flex;flex-direction:column;gap:5px}
+        .mob-nav-trigger .mlines span{display:block;width:18px;height:1.5px;background:var(--bg);transition:all .4s cubic-bezier(.23,1,.32,1);transform-origin:center}
+        .mob-nav-open .mob-nav-trigger .mlines span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
         .mob-nav-open .mob-nav-trigger .mlines span:nth-child(2){opacity:0;transform:scaleX(0)}
-        .mob-nav-open .mob-nav-trigger .mlines span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
-        .mob-nav-backdrop{position:fixed;inset:0;z-index:250;background:rgba(8,6,4,.8);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .38s}
+        .mob-nav-open .mob-nav-trigger .mlines span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+        .mob-nav-backdrop{position:fixed;inset:0;z-index:250;background:rgba(8,6,4,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:0;pointer-events:none;transition:opacity .38s}
         .mob-nav-open .mob-nav-backdrop{opacity:1;pointer-events:all}
-        .mob-nav-cards{position:absolute;bottom:0;right:0;width:220px;pointer-events:none}
-        .mncard{position:absolute;bottom:0;right:0;width:210px;background:var(--bg-surface);border:1px solid var(--border);border-radius:14px;padding:13px 18px 13px 16px;cursor:pointer;text-decoration:none;display:flex;align-items:center;justify-content:space-between;opacity:0;transform:translateY(0) rotate(0deg) scale(.88);transition:transform .5s cubic-bezier(.23,1,.32,1),opacity .35s ease,background .2s;box-shadow:0 4px 20px rgba(8,6,4,.4)}
+        .mob-nav-cards{position:absolute;bottom:0;right:0;width:230px;pointer-events:none}
+        .mncard{position:absolute;bottom:0;right:0;width:222px;background:var(--bg-surface);border:1px solid var(--border);border-radius:16px;padding:15px 20px 15px 18px;cursor:pointer;text-decoration:none;display:flex;align-items:center;justify-content:space-between;opacity:0;transform:translateY(0) rotate(0deg) scale(.88);transition:transform .5s cubic-bezier(.23,1,.32,1),opacity .35s ease,background .2s;box-shadow:0 4px 24px rgba(8,6,4,.45)}
         .mncard:active{background:var(--bg-surface2)}
         .mncard-label{
             font-family:'Cormorant Garamond',serif;
-            font-size:1.05rem;font-style:italic;
+            font-size:1.12rem;font-style:italic;
             color:var(--ink);line-height:1;
         }
         .mncard-num{font-family:'Jost',sans-serif;font-size:9px;letter-spacing:.18em;color:var(--gold-dim)}
         .mob-nav-open .mob-nav-cards{pointer-events:all}
-        .mob-nav-open .mncard:nth-child(1){opacity:1;transform:translateY(-68px)  rotate(-1.5deg);transition-delay:.03s}
-        .mob-nav-open .mncard:nth-child(2){opacity:1;transform:translateY(-130px) rotate(-.5deg); transition-delay:.07s}
-        .mob-nav-open .mncard:nth-child(3){opacity:1;transform:translateY(-192px) rotate(.4deg);  transition-delay:.11s}
-        .mob-nav-open .mncard:nth-child(4){opacity:1;transform:translateY(-254px) rotate(1deg);   transition-delay:.15s}
-        .mob-nav-open .mncard:nth-child(5){opacity:1;transform:translateY(-316px) rotate(1.5deg); transition-delay:.19s}
-        .mob-nav-open .mncard:nth-child(6){opacity:1;transform:translateY(-378px) rotate(2deg);   transition-delay:.23s}
-        .mob-nav-open .mncard:nth-child(7){opacity:1;transform:translateY(-440px) rotate(2.4deg); transition-delay:.27s}
+        .mob-nav-open .mncard:nth-child(1){opacity:1;transform:translateY(-72px)  rotate(-1.5deg);transition-delay:.03s}
+        .mob-nav-open .mncard:nth-child(2){opacity:1;transform:translateY(-138px) rotate(-.5deg); transition-delay:.07s}
+        .mob-nav-open .mncard:nth-child(3){opacity:1;transform:translateY(-204px) rotate(.4deg);  transition-delay:.11s}
+        .mob-nav-open .mncard:nth-child(4){opacity:1;transform:translateY(-270px) rotate(1deg);   transition-delay:.15s}
+        .mob-nav-open .mncard:nth-child(5){opacity:1;transform:translateY(-336px) rotate(1.5deg); transition-delay:.19s}
+        .mob-nav-open .mncard:nth-child(6){opacity:1;transform:translateY(-402px) rotate(2deg);   transition-delay:.23s}
+        .mob-nav-open .mncard:nth-child(7){opacity:1;transform:translateY(-468px) rotate(2.4deg); transition-delay:.27s}
     </style>
 </head>
 <body>
@@ -516,7 +557,7 @@
         <a href="#rit"><span class="cs">Rituály</span><span class="en" style="display:none">Rituals</span></a>
         <a href="#malby"><span class="cs">Malby</span><span class="en" style="display:none">Paintings</span></a>
         <a href="projekt.html"><span class="cs">Jiné projekty</span><span class="en" style="display:none">Other projects</span></a>
-        <a href="#vystava"><span class="cs">Výstavy</span><span class="en" style="display:none">Exhibitions</span></a>
+        <a href="#vystava"><span class="cs">Zkušenosti</span><span class="en" style="display:none">Experience</span></a>
         <a href="#kontakt"><span class="cs">Kontakt</span><span class="en" style="display:none">Contact</span></a>
     </nav>
 </div>
@@ -530,7 +571,7 @@
         <a class="mncard" href="#rit"><span class="mncard-label"><span class="cs">Rituály</span><span class="en" style="display:none">Rituals</span></span><span class="mncard-num">03</span></a>
         <a class="mncard" href="#malby"><span class="mncard-label"><span class="cs">Malby</span><span class="en" style="display:none">Paintings</span></span><span class="mncard-num">04</span></a>
         <a class="mncard" href="projekt.html"><span class="mncard-label"><span class="cs">Jiné projekty</span><span class="en" style="display:none">Other projects</span></span><span class="mncard-num">05</span></a>
-        <a class="mncard" href="#vystava"><span class="mncard-label"><span class="cs">Výstavy</span><span class="en" style="display:none">Exhibitions</span></span><span class="mncard-num">06</span></a>
+        <a class="mncard" href="#vystava"><span class="mncard-label"><span class="cs">Zkušenosti</span><span class="en" style="display:none">Experience</span></span><span class="mncard-num">06</span></a>
         <a class="mncard" href="#kontakt"><span class="mncard-label"><span class="cs">Kontakt</span><span class="en" style="display:none">Contact</span></span><span class="mncard-num">07</span></a>
     </div>
     <button class="mob-nav-trigger" id="mobNavTrigger" aria-label="Menu">
@@ -564,29 +605,15 @@
 </section>
 
 <!-- ════════ O MNĚ ════════ -->
-<section class="section-full reveal" id="omne">
+<section class="section reveal" id="omne">
     <div class="about-grid">
         <div>
             <p class="section-label"><span class="cs">O mně</span><span class="en" style="display:none">About</span></p>
             <h2 class="sec-h2"><span class="cs">Něco o mně</span><span class="en" style="display:none">About me</span></h2>
             <p class="body-text">
-        <span class="cs">Jsem malířka a tatérka, jejíž tvorba se pohybuje na pomezí volného umění a fyzické zkušenosti tetování. Ve svých obrazech zkoumám vztah mezi člověkem a přírodou, často na hranici hmatatelného a zdánlivě neviditelného. Vycházím z osobních prožitků, které přenáším na plátno v podobě vizuálních deníkových záznamů, skrze něž navazuji dialog s divákem. Obraz vnímám jako pozvání k nahlédnutí do vnitřního světa, v němž může divák nacházet paralely s vlastní zkušeností.
-<br>
-Studium:
-<br>
-Střední umělecko průmyslová škola, obor propagační výtvarnictví-výstavnictví
-<br>
-Akademii výtvarných umění v Praze, kde studovala pod vedením osobností, jako jsou Milan Knížák a Vladimír Kokolia. Významnou zkušeností byla cesta přes Erasmus do Jižní Koreji, kde strávila semestr foukáním a odléváním skla.
-
-        <span class="en" style="display:none">I am a painter and tattoo artist whose work exists at the intersection of fine art and the physical experience of tattooing. In my paintings, I explore the relationship between humans and nature, often on the boundary between the tangible and the seemingly invisible. I draw from personal experiences, translating them onto canvas as visual diary entries through which I establish a dialogue with the viewer. I perceive each painting as an invitation to enter an inner world where viewers may find parallels with their own experiences.
-        <br>
-Education:
-<br>
-Secondary School of Applied Arts, specializing in Advertising Art and Exhibition Design
-<br>
-Academy of Fine Arts in Prague, where I studied under the guidance of figures such as Milan Knížák and Vladimír Kokolia. An important experience was an Erasmus stay in South Korea, where I spent a semester working with glassblowing and glass casting.
-</span>
-            </span></p>
+                <span class="cs">Jsem malířka a tatérka, jejíž tvorba se pohybuje na pomezí volného umění a fyzické zkušenosti tetování. Ve svých obrazech zkoumám vztah mezi člověkem a přírodou, často na hranici hmatatelného a zdánlivě neviditelného. Vycházím z osobních prožitků, které přenáším na plátno v podobě vizuálních deníkových záznamů, skrze něž navazuji dialog s divákem. Obraz vnímám jako pozvání k nahlédnutí do vnitřního světa, v němž může divák nacházet paralely s vlastní zkušeností.</span>
+                <span class="en" style="display:none">I am a painter and tattoo artist whose work exists at the intersection of fine art and the physical experience of tattooing. In my paintings, I explore the relationship between humans and nature, often on the boundary between the tangible and the seemingly invisible. I draw from personal experiences, translating them onto canvas as visual diary entries through which I establish a dialogue with the viewer. I perceive each painting as an invitation to enter an inner world where viewers may find parallels with their own experiences.</span>
+            </p>
         </div>
         <!--
           FOTO — O MNĚ
@@ -769,7 +796,7 @@ For me, tattooing goes beyond a purely aesthetic dimension—it is connected to 
 </section>
 
 <!-- ════════ RITUÁLY ════════ -->
-<section class="section-full reveal" id="rit">
+<section class="section reveal" id="rit">
     <p class="section-label"><span class="cs">Nabídka</span><span class="en" style="display:none">Offering</span></p>
     <h2 class="sec-h2"><span class="cs">Rituály</span><span class="en" style="display:none">Rituals</span></h2>
     <p class="body-text">
@@ -883,77 +910,106 @@ These experiences naturally permeate my work, which is a continuous search for n
     </div>
 </section>
 
-<!-- ════════ VÝSTAVY ════════ -->
-<section class="exhibitions-sec reveal" id="vystava">
-    <p class="section-label"><span class="cs">Výstavní činnost</span><span class="en" style="display:none">Exhibition activity</span></p>
-    <h2 class="sec-h2"><span class="cs">Výstavy</span><span class="en" style="display:none">Exhibitions</span></h2>
-    <p class="body-text">
-        <span class="cs">Lorem ipsum dolor sit amet consectetur. Urna tempor pulvinar vivamus fringilla lacus.</span>
-        <span class="en" style="display:none">Lorem ipsum dolor sit amet consectetur. Urna tempor pulvinar vivamus fringilla lacus.</span>
-    </p>
-    <!--
-      VÝSTAVY — přidat další výstavu: zkopírovat .exh-item blok
-    -->
-    <div class="exh-list">
+<!-- ════════ ZKUŠENOSTI (Studium + Výstavy + Rezidence) ════════ -->
+<section class="zkusenosti-sec reveal" id="vystava">
+    <div class="zkusenosti-inner">
 
-        <div class="exh-item">
-            <span class="exh-date">2026</span>
-            <span class="exh-title"><span class="cs">Divy</span><span class="en" style="display:none">Wonders</span></span>
-            <span class="exh-place"><span class="cs">Cafe Záhorský — společná výstava</span><span class="en" style="display:none">Cafe Záhorský — group exhibition</span></span>
+        <p class="section-label"><span class="cs">Zkušenosti</span><span class="en" style="display:none">Experience</span></p>
+        <h2 class="sec-h2"><span class="cs">Vzdělání &amp; výstavy</span><span class="en" style="display:none">Education &amp; exhibitions</span></h2>
+
+        <!-- ── STUDIUM ── -->
+        <h3 class="sec-h2" style="font-size:clamp(1.5rem,3vw,2.2rem);margin-top:44px;margin-bottom:0">
+            <span class="cs">Studium</span><span class="en" style="display:none">Education</span>
+        </h3>
+        <div class="studium-grid">
+            <div class="studium-item">
+                <span class="studium-period"><span class="cs">Střední škola</span><span class="en" style="display:none">Secondary school</span></span>
+                <div class="studium-name"><span class="cs">Střední umělecko průmyslová škola</span><span class="en" style="display:none">Secondary School of Applied Arts</span></div>
+                <div class="studium-detail"><span class="cs">Obor propagační výtvarnictví — výstavnictví</span><span class="en" style="display:none">Advertising Art and Exhibition Design</span></div>
+            </div>
+            <div class="studium-item">
+                <span class="studium-period"><span class="cs">Vysoká škola</span><span class="en" style="display:none">University</span></span>
+                <div class="studium-name"><span class="cs">Akademie výtvarných umění, Praha</span><span class="en" style="display:none">Academy of Fine Arts, Prague</span></div>
+                <div class="studium-detail"><span class="cs">Pod vedením Milana Knížáka a Vladimíra Kokolia</span><span class="en" style="display:none">Under Milan Knížák and Vladimír Kokolia</span></div>
+            </div>
+            <div class="studium-item">
+                <span class="studium-period">Erasmus</span>
+                <div class="studium-name"><span class="cs">Jižní Korea</span><span class="en" style="display:none">South Korea</span></div>
+                <div class="studium-detail"><span class="cs">Semestr — foukání a odlévání skla</span><span class="en" style="display:none">Semester — glassblowing and glass casting</span></div>
+            </div>
         </div>
 
-        <div class="exh-item">
-            <span class="exh-date">2025</span>
-            <span class="exh-title"><span class="cs">Společná výstava</span><span class="en" style="display:none">Group exhibition</span></span>
-            <span class="exh-place"><span class="cs">Hotel InnSide, Praha</span><span class="en" style="display:none">Hotel InnSide, Prague</span></span>
+        <!-- ── VÝSTAVY ── -->
+        <h3 class="sec-h2" style="font-size:clamp(1.5rem,3vw,2.2rem);margin-bottom:0">
+            <span class="cs">Výstavy</span><span class="en" style="display:none">Exhibitions</span>
+        </h3>
+        <!--
+          Přidat výstavu: zkopírovat .exh-item blok
+        -->
+        <div class="exh-list">
+
+            <div class="exh-item">
+                <span class="exh-date">2026</span>
+                <span class="exh-title"><span class="cs">Divy</span><span class="en" style="display:none">Wonders</span></span>
+                <span class="exh-place">📍 <span class="cs">Cafe Záhorský — společná výstava</span><span class="en" style="display:none">Cafe Záhorský — group exhibition</span></span>
+            </div>
+
+            <div class="exh-item">
+                <span class="exh-date">2025</span>
+                <span class="exh-title"><span class="cs">Společná výstava</span><span class="en" style="display:none">Group exhibition</span></span>
+                <span class="exh-place">📍 <span class="cs">Hotel InnSide, Praha</span><span class="en" style="display:none">Hotel InnSide, Prague</span></span>
+            </div>
+
+            <div class="exh-item">
+                <span class="exh-date">2024</span>
+                <span class="exh-title"><span class="cs">Z čtverce dělám kruh</span><span class="en" style="display:none">From a Square I Make a Circle</span></span>
+                <span class="exh-place">📍 <span class="cs">SOL Jičín — malířské sympozium a výstava</span><span class="en" style="display:none">SOL Jičín — painting symposium and exhibition</span></span>
+            </div>
+
+            <div class="exh-item">
+                <span class="exh-date">2023</span>
+                <span class="exh-title"><span class="cs">Učení se ze zkušenosti</span><span class="en" style="display:none">Learning from Experience</span></span>
+                <span class="exh-place">📍 <span class="cs">Prostor 39, Praha</span><span class="en" style="display:none">Prostor 39, Prague</span></span>
+            </div>
+
+            <div class="exh-item">
+                <span class="exh-date">2022</span>
+                <span class="exh-title"><span class="cs">Jsem cibule</span><span class="en" style="display:none">I Am an Onion</span></span>
+                <span class="exh-place">📍 <span class="cs">Champagneria, Praha</span><span class="en" style="display:none">Champagneria, Prague</span></span>
+            </div>
+
+            <div class="exh-item">
+                <span class="exh-date">2021</span>
+                <span class="exh-title"><span class="cs">Talking to Myself</span><span class="en" style="display:none">Talking to Myself</span></span>
+                <span class="exh-place">📍 <span class="cs">Galerie StellArt, Praha</span><span class="en" style="display:none">Galerie StellArt, Prague</span></span>
+            </div>
+
+            <div class="exh-item">
+                <span class="exh-date">2017</span>
+                <span class="exh-title"><span class="cs">Roztoč Fest</span><span class="en" style="display:none">Roztoč Fest</span></span>
+                <span class="exh-place">📍 <span class="cs">Nákladové nádraží Žižkov</span><span class="en" style="display:none">Žižkov Freight Station</span></span>
+            </div>
+
+            <div class="exh-item">
+                <span class="exh-date">2017</span>
+                <span class="exh-title"><span class="cs">Skupinová výstava ateliéru GR 2</span><span class="en" style="display:none">Group Exhibition of Studio GR 2</span></span>
+                <span class="exh-place">📍 <span class="cs">Veletržní palác, Praha</span><span class="en" style="display:none">Veletržní palác, Prague</span></span>
+            </div>
+
         </div>
 
-        <div class="exh-item">
-            <span class="exh-date">2024</span>
-            <span class="exh-title"><span class="cs">Z čtverce dělám kruh</span><span class="en" style="display:none">From a Square I Make a Circle</span></span>
-            <span class="exh-place"><span class="cs">SOL Jičín — malířské sympozium a výstava</span><span class="en" style="display:none">SOL Jičín — painting symposium and exhibition</span></span>
-        </div>
+        <!-- ── REZIDENCE ── -->
+        <h3 class="sec-h2" style="font-size:clamp(1.5rem,3vw,2.2rem);margin-top:60px;margin-bottom:0">
+            <span class="cs">Rezidence</span><span class="en" style="display:none">Residencies</span>
+        </h3>
+        <div class="exh-list">
 
-        <div class="exh-item">
-            <span class="exh-date">2023</span>
-            <span class="exh-title"><span class="cs">Učení se ze zkušenosti</span><span class="en" style="display:none">Learning from Experience</span></span>
-            <span class="exh-place"><span class="cs">Prostor 39, Praha</span><span class="en" style="display:none">Prostor 39, Prague</span></span>
-        </div>
+            <div class="exh-item">
+                <span class="exh-date">2024</span>
+                <span class="exh-title"><span class="cs">Balbineum</span><span class="en" style="display:none">Balbineum</span></span>
+                <span class="exh-place">📍 <span class="cs">Jezuitská kolej, Jičín</span><span class="en" style="display:none">Jesuit College, Jičín</span></span>
+            </div>
 
-        <div class="exh-item">
-            <span class="exh-date">2022</span>
-            <span class="exh-title"><span class="cs">Jsem cibule</span><span class="en" style="display:none">I Am an Onion</span></span>
-            <span class="exh-place"><span class="cs">Champagneria, Praha</span><span class="en" style="display:none">Champagneria, Prague</span></span>
-        </div>
-
-        <div class="exh-item">
-            <span class="exh-date">2021</span>
-            <span class="exh-title"><span class="cs">Talking to Myself</span><span class="en" style="display:none">Talking to Myself</span></span>
-            <span class="exh-place"><span class="cs">Galerie StellArt, Praha</span><span class="en" style="display:none">Galerie StellArt, Prague</span></span>
-        </div>
-
-        <div class="exh-item">
-            <span class="exh-date">2017</span>
-            <span class="exh-title"><span class="cs">Roztoč Fest</span><span class="en" style="display:none">Roztoč Fest</span></span>
-            <span class="exh-place"><span class="cs">Nákladové nádraží Žižkov</span><span class="en" style="display:none">Žižkov Freight Station</span></span>
-        </div>
-
-        <div class="exh-item">
-            <span class="exh-date">2017</span>
-            <span class="exh-title"><span class="cs">Skupinová výstava ateliéru GR 2</span><span class="en" style="display:none">Group Exhibition of Studio GR 2</span></span>
-            <span class="exh-place"><span class="cs">Veletržní palác</span><span class="en" style="display:none">Veletržní palác (Trade Fair Palace)</span></span>
-        </div>
-
-    </div>
-
-    <!-- REZIDENCE -->
-    <h2 class="sec-h2" style="margin-top: 3rem;"><span class="cs">Rezidence</span><span class="en" style="display:none">Residencies</span></h2>
-    <div class="exh-list">
-
-        <div class="exh-item">
-            <span class="exh-date">2024</span>
-            <span class="exh-title"><span class="cs">Balbineum</span><span class="en" style="display:none">Balbineum</span></span>
-            <span class="exh-place"><span class="cs">Jezuitská kolej, Jičín</span><span class="en" style="display:none">Jesuit College, Jičín</span></span>
         </div>
 
     </div>
