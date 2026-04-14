@@ -151,27 +151,30 @@
         /* ═══════════════════════════════════════════
            SECTION PRIMITIVES
         ═══════════════════════════════════════════ */
-        .section{padding:clamp(60px,10vw,110px) clamp(24px,8vw,140px);max-width:1200px;margin:0 auto}
-        .section-label{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:12px;display:flex;align-items:center;gap:16px}
+        /* Horizontal padding uses 6vw to align section content with the Hero heading's left edge */
+        .section{padding:clamp(60px,10vw,110px) 6vw;width:100%}
+        .section > *{max-width:1480px}
+        .section-label{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:14px;display:flex;align-items:center;gap:16px}
         .section-label::after{content:'';flex:0 0 36px;height:1px;background:var(--gold-dim)}
 
         /* Section headings — Cormorant Garamond, replaces Caveat everywhere */
         .sec-h2{
             font-family:'Cormorant Garamond',serif;
-            font-size:clamp(2.4rem,5.5vw,4rem);
+            font-size:clamp(2.8rem,5.8vw,4.8rem);
             font-weight:600;
             font-style:italic;
             line-height:.95;
             color:var(--ink);
-            margin-bottom:24px;
+            margin-bottom:26px;
             letter-spacing:-.01em;
         }
-        .body-text{font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,1.5vw,1.18rem);line-height:1.88;color:var(--ink-muted);max-width:560px}
+        .body-text{font-family:'Cormorant Garamond',serif;font-size:clamp(1.12rem,1.55vw,1.38rem);line-height:1.82;color:var(--ink-muted);max-width:760px}
 
         /* ═══════════════════════════════════════════
            ABOUT
         ═══════════════════════════════════════════ */
         .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
+        .about-grid > div:first-child{grid-column:1}
         .about-img{position:relative;aspect-ratio:3/4;background:var(--bg-surface);overflow:hidden;border-radius:2px}
         .about-img::before{content:'';position:absolute;top:-8px;right:-8px;width:100%;height:100%;border:1px solid var(--gold-dim);opacity:.5;z-index:-1}
         .about-img-ph{width:100%;height:100%;background:linear-gradient(160deg,#2f2820,#3a2e1e);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.9rem;color:var(--gold-dim)}
@@ -182,12 +185,15 @@
         ═══════════════════════════════════════════ */
         .gallery-wrap{padding:clamp(60px,8vw,100px) 0;background:var(--bg-surface)}
         .gallery-wrap.light{background:var(--bg)}
-        .gallery-header{padding:0 clamp(24px,8vw,140px);margin-bottom:44px;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px}
+        /* Gallery content left-pinned at 6vw (aligned with Hero heading), capped at 1480px */
+        .gallery-header{padding:0 6vw;margin-bottom:44px;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;max-width:1480px}
+        .gallery-intro{padding:0 6vw;max-width:1480px}
 
         /* ── SLIDESHOW — 1 focussed image + 4 thumbs ── */
         .slideshow{
             position:relative;
-            padding:0 clamp(24px,8vw,140px);
+            padding:0 6vw;
+            max-width:1480px;
         }
         .slide-main{
             position:relative;
@@ -238,8 +244,8 @@
             font-size:18px;line-height:1;
         }
         .slide-arrow:hover{background:rgba(196,168,130,.15);border-color:var(--gold)}
-        .slide-arrow.prev{left:clamp(28px,8vw,148px)}
-        .slide-arrow.next{right:clamp(28px,8vw,148px)}
+        .slide-arrow.prev{left:clamp(28px,6vw,110px)}
+        .slide-arrow.next{right:clamp(28px,6vw,110px)}
 
         /* Dot strip */
         .slide-dots{
@@ -278,8 +284,9 @@
 
         /* ── GALLERY SUBSECTION (tetování / malby podsekce) ── */
         .gallery-subsec{
-            padding:clamp(40px,6vw,80px) clamp(24px,8vw,140px);
+            padding:clamp(40px,6vw,80px) 6vw;
             border-top:1px solid var(--border);
+            max-width:1480px;
         }
         .gallery-subsec:first-child{border-top:none}
         .subsec-label{
@@ -289,16 +296,16 @@
         }
         .subsec-h3{
             font-family:'Cormorant Garamond',serif;
-            font-size:clamp(1.6rem,3.5vw,2.4rem);
+            font-size:clamp(1.8rem,3.6vw,2.7rem);
             font-weight:600;font-style:italic;
-            color:var(--ink);margin-bottom:14px;
+            color:var(--ink);margin-bottom:16px;
             line-height:1;
         }
         .subsec-body{
             font-family:'Cormorant Garamond',serif;
-            font-size:clamp(.95rem,1.4vw,1.1rem);
-            line-height:1.85;color:var(--ink-muted);
-            max-width:520px;margin-bottom:32px;
+            font-size:clamp(1.05rem,1.45vw,1.24rem);
+            line-height:1.82;color:var(--ink-muted);
+            max-width:720px;margin-bottom:34px;
         }
 
         /* Technique tags */
@@ -343,26 +350,29 @@
         .exh-item:first-child{border-top:1px solid var(--border)}
         .exh-date{
             font-family:'Cormorant Garamond',serif;
-            font-size:1.05rem;font-style:italic;
-            color:var(--gold);opacity:.75;
+            font-size:1.18rem;font-style:italic;
+            color:var(--gold);opacity:.95;
         }
         .exh-title{
             font-family:'Cormorant Garamond',serif;
-            font-size:1.1rem;font-weight:300;
+            font-size:1.22rem;font-weight:400;
             color:var(--ink);line-height:1.4;
         }
+        /* Was gold @ 85% → unreadable on dark bg. Use ink at 88% for proper contrast. */
         .exh-place{
-            font-size:1rem;
-            color:var(--gold);font-family:'Cormorant Garamond',serif;
+            font-size:1.12rem;
+            color:var(--ink);font-family:'Cormorant Garamond',serif;
             font-style:italic;
             text-align:right;
-            opacity:.85;
+            opacity:.88;
         }
 
         /* ═══════════════════════════════════════════
            CONTACT
         ═══════════════════════════════════════════ */
-        .contact-sec{padding:clamp(60px,10vw,110px) clamp(24px,8vw,140px);background:var(--bg-contact);position:relative;overflow:hidden}
+        .contact-sec{padding:clamp(60px,10vw,110px) 6vw;background:var(--bg-contact);position:relative;overflow:hidden}
+        /* Left-pinned content column, matches .section (::before is pseudo, excluded automatically) */
+        .contact-sec > *{max-width:1480px;position:relative;z-index:1}
         .contact-sec::before{
             content:'spolu';
             font-family:'Cormorant Garamond',serif;
@@ -385,7 +395,7 @@
         /* ═══════════════════════════════════════════
            FOOTER
         ═══════════════════════════════════════════ */
-        footer{background:var(--bg-footer);padding:22px clamp(24px,8vw,140px);display:flex;justify-content:space-between;align-items:center}
+        footer{background:var(--bg-footer);padding:22px 6vw;display:flex;justify-content:space-between;align-items:center}
         .fcopy{font-size:11px;letter-spacing:.1em;color:var(--gold-dim);font-family:'Jost',sans-serif}
         .fname{
             font-family:'Cormorant Garamond',serif;
@@ -407,10 +417,11 @@
            ZKUŠENOSTI — Studium + Výstavy + Rezidence
         ═══════════════════════════════════════════ */
         .zkusenosti-sec{
-            padding:clamp(60px,10vw,110px) clamp(24px,8vw,140px);
+            padding:clamp(60px,10vw,110px) 6vw;
             background:var(--bg);
         }
-        .zkusenosti-inner{max-width:1200px;margin:0 auto}
+        /* Left-pinned, matches .section — no margin:auto */
+        .zkusenosti-inner{max-width:1480px}
 
         .studium-grid{
             margin-top:44px;
@@ -476,8 +487,7 @@
            MOBILE ≤ 600px
         ═══════════════════════════════════════════ */
         @media(max-width:600px){
-            .nav-trigger,.nav-overlay{display:none}
-            .mob-nav-stack{display:block}
+            /* Desktop hamburger (top-right) is reused on mobile — no override needed */
             .hero{height:58vh;min-height:300px;max-height:460px;padding:0 22px 28px}
             .scroll-hint{display:none}
             .section{padding:40px 22px}
@@ -503,37 +513,6 @@
             .zkusenosti-sec{padding:40px 22px}
         }
 
-        /* ═══════════════════════════════════════════
-           MOBILE CARD-STACK NAV
-        ═══════════════════════════════════════════ */
-        .mob-nav-stack{display:none;position:fixed;bottom:calc(28px + var(--safe-bottom));right:20px;z-index:300;width:64px;height:64px}
-        .mob-nav-trigger{position:absolute;bottom:0;right:0;width:60px;height:60px;background:var(--ink);border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 28px rgba(8,6,4,.6);transition:transform .4s cubic-bezier(.34,1.56,.64,1),box-shadow .3s;z-index:2}
-        .mob-nav-trigger:hover{box-shadow:0 8px 32px rgba(8,6,4,.7)}
-        .mob-nav-trigger:active{transform:scale(.92)}
-        .mob-nav-trigger .mlines{display:flex;flex-direction:column;gap:5px}
-        .mob-nav-trigger .mlines span{display:block;width:18px;height:1.5px;background:var(--bg);transition:all .4s cubic-bezier(.23,1,.32,1);transform-origin:center}
-        .mob-nav-open .mob-nav-trigger .mlines span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
-        .mob-nav-open .mob-nav-trigger .mlines span:nth-child(2){opacity:0;transform:scaleX(0)}
-        .mob-nav-open .mob-nav-trigger .mlines span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
-        .mob-nav-backdrop{position:fixed;inset:0;z-index:250;background:rgba(8,6,4,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:0;pointer-events:none;transition:opacity .38s}
-        .mob-nav-open .mob-nav-backdrop{opacity:1;pointer-events:all}
-        .mob-nav-cards{position:absolute;bottom:0;right:0;width:230px;pointer-events:none}
-        .mncard{position:absolute;bottom:0;right:0;width:222px;background:var(--bg-surface);border:1px solid var(--border);border-radius:16px;padding:15px 20px 15px 18px;cursor:pointer;text-decoration:none;display:flex;align-items:center;justify-content:space-between;opacity:0;transform:translateY(0) rotate(0deg) scale(.88);transition:transform .5s cubic-bezier(.23,1,.32,1),opacity .35s ease,background .2s;box-shadow:0 4px 24px rgba(8,6,4,.45)}
-        .mncard:active{background:var(--bg-surface2)}
-        .mncard-label{
-            font-family:'Cormorant Garamond',serif;
-            font-size:1.12rem;font-style:italic;
-            color:var(--ink);line-height:1;
-        }
-        .mncard-num{font-family:'Jost',sans-serif;font-size:9px;letter-spacing:.18em;color:var(--gold-dim)}
-        .mob-nav-open .mob-nav-cards{pointer-events:all}
-        .mob-nav-open .mncard:nth-child(1){opacity:1;transform:translateY(-72px)  rotate(-1.5deg);transition-delay:.03s}
-        .mob-nav-open .mncard:nth-child(2){opacity:1;transform:translateY(-138px) rotate(-.5deg); transition-delay:.07s}
-        .mob-nav-open .mncard:nth-child(3){opacity:1;transform:translateY(-204px) rotate(.4deg);  transition-delay:.11s}
-        .mob-nav-open .mncard:nth-child(4){opacity:1;transform:translateY(-270px) rotate(1deg);   transition-delay:.15s}
-        .mob-nav-open .mncard:nth-child(5){opacity:1;transform:translateY(-336px) rotate(1.5deg); transition-delay:.19s}
-        .mob-nav-open .mncard:nth-child(6){opacity:1;transform:translateY(-402px) rotate(2deg);   transition-delay:.23s}
-        .mob-nav-open .mncard:nth-child(7){opacity:1;transform:translateY(-468px) rotate(2.4deg); transition-delay:.27s}
     </style>
 </head>
 <body>
@@ -562,23 +541,6 @@
     </nav>
 </div>
 
-<!-- MOBILE CARD-STACK NAV -->
-<div class="mob-nav-stack" id="mobNavStack">
-    <div class="mob-nav-backdrop" id="mobNavBackdrop"></div>
-    <div class="mob-nav-cards">
-        <a class="mncard" href="#omne"><span class="mncard-label"><span class="cs">Něco o mně</span><span class="en" style="display:none">About me</span></span><span class="mncard-num">01</span></a>
-        <a class="mncard" href="#tet"><span class="mncard-label"><span class="cs">Tetování</span><span class="en" style="display:none">Tattoo</span></span><span class="mncard-num">02</span></a>
-        <a class="mncard" href="#rit"><span class="mncard-label"><span class="cs">Rituály</span><span class="en" style="display:none">Rituals</span></span><span class="mncard-num">03</span></a>
-        <a class="mncard" href="#malby"><span class="mncard-label"><span class="cs">Malby</span><span class="en" style="display:none">Paintings</span></span><span class="mncard-num">04</span></a>
-        <a class="mncard" href="projekt.html"><span class="mncard-label"><span class="cs">Jiné projekty</span><span class="en" style="display:none">Other projects</span></span><span class="mncard-num">05</span></a>
-        <a class="mncard" href="#vystava"><span class="mncard-label"><span class="cs">Zkušenosti</span><span class="en" style="display:none">Experience</span></span><span class="mncard-num">06</span></a>
-        <a class="mncard" href="#kontakt"><span class="mncard-label"><span class="cs">Kontakt</span><span class="en" style="display:none">Contact</span></span><span class="mncard-num">07</span></a>
-    </div>
-    <button class="mob-nav-trigger" id="mobNavTrigger" aria-label="Menu">
-        <div class="mlines"><span></span><span></span><span></span></div>
-    </button>
-</div>
-
 <!-- ════════ HERO ════════ -->
 <section class="hero">
     <div class="hero-bg">
@@ -601,8 +563,7 @@
         <h1 class="hero-name">Saskia<br>Kafková</h1>
         <p class="hero-tagline"><span class="cs">Tvorba, která vychází z těla, země a ticha.</span><span class="en" style="display:none">Art rooted in body, earth, and silence.</span></p>
     </div>
-    <div class="scroll-hint"><div class="scroll-line"></div><span>scroll</span></div>
-</section>
+    </section>
 
 <!-- ════════ O MNĚ ════════ -->
 <section class="section reveal" id="omne">
@@ -615,12 +576,11 @@
                 <span class="en" style="display:none">I am a painter and tattoo artist whose work exists at the intersection of fine art and the physical experience of tattooing. In my paintings, I explore the relationship between humans and nature, often on the boundary between the tangible and the seemingly invisible. I draw from personal experiences, translating them onto canvas as visual diary entries through which I establish a dialogue with the viewer. I perceive each painting as an invitation to enter an inner world where viewers may find parallels with their own experiences.</span>
             </p>
         </div>
-        <!--
-          FOTO — O MNĚ
-          Swap .about-img-ph with: <img src="images/about/photo.webp" alt="Saskia Kafková" loading="lazy">
-        -->
         <div class="about-img">
-            <div class="about-img-ph">foto zde</div>
+            <picture>
+                <source srcset="images/about-me/IMG_1490.webp" type="image/webp">
+                <img src="images/about-me/IMG_1490.jpeg" alt="Saskia Kafková" loading="lazy" decoding="async">
+            </picture>
         </div>
     </div>
 </section>
@@ -642,7 +602,7 @@
             <h2 class="sec-h2"><span class="cs">Tetování</span><span class="en" style="display:none">Tattoo</span></h2>
         </div>
     </div>
-    <div style="padding:0 clamp(24px,8vw,140px) 0; max-width:1200px;">
+    <div class="gallery-intro">
         <p class="body-text" style="margin-bottom:0">
             <span class="cs">Lorem ipsum dolor sit amet consectetur adipiscing elit. Urna tempor pulvinar vivamus fringilla lacus nec metus. Integer nunc posuere ut hendrerit semper.</span>
             <span class="en" style="display:none">Lorem ipsum dolor sit amet consectetur adipiscing elit. Urna tempor pulvinar vivamus fringilla lacus nec metus.</span>
@@ -836,7 +796,7 @@ These experiences naturally permeate my work, which is a continuous search for n
             <h2 class="sec-h2"><span class="cs">Malby</span><span class="en" style="display:none">Paintings</span></h2>
         </div>
     </div>
-    <div style="padding:0 clamp(24px,8vw,140px) 0">
+    <div class="gallery-intro">
         <p class="body-text" style="margin-bottom:0">
             <span class="cs">Výrazným prvkem mé malby je práce s intenzitou a sytostí barev, které chápu jako manifest životní energie, jež je nedílnou součástí naší existence. Barva pro mě představuje svobodný prostředek vyjádření i způsob, jak vnímat svět v celé šíři jeho světelného a barevného spektra.</span>
             <span class="en" style="display:none">A distinctive element of my work is the use of intensity and saturation of color, which I understand as a manifestation of life energy—an inseparable part of our existence. For me, color represents both a free means of expression and a way of perceiving the world in the full breadth of its light and chromatic spectrum.</span>
@@ -851,27 +811,60 @@ These experiences naturally permeate my work, which is a continuous search for n
             <span class="cs">Lorem ipsum dolor sit amet consectetur adipiscing elit. Urna tempor pulvinar vivamus fringilla lacus nec metus. Inkoust, pigment, zemina — materiály s vlastní pamětí.</span>
             <span class="en" style="display:none">Lorem ipsum dolor sit amet consectetur adipiscing elit. Ink, pigment, earth — materials with their own memory.</span>
         </p>
+        <!-- 4 slides wired. 5th slot reserved — uncomment the pair of blocks marked "5TH" once the image is added to images/general-paintings/. -->
         <div class="slideshow" id="ss-malby" style="padding:0">
             <div class="slide-main" onclick="openLBSlide('ss-malby')">
-                <div class="slide-main-img active"><div class="ph" style="background:linear-gradient(160deg,#2a231a,#1e1a15)">malba 1</div></div>
-                <div class="slide-main-img"><div class="ph" style="background:linear-gradient(160deg,#2f2820,#231e18)">malba 2</div></div>
-                <div class="slide-main-img"><div class="ph" style="background:linear-gradient(160deg,#252018,#1a1714)">malba 3</div></div>
-                <div class="slide-main-img"><div class="ph" style="background:linear-gradient(160deg,#312920,#251f18)">malba 4</div></div>
-                <div class="slide-main-img"><div class="ph" style="background:linear-gradient(160deg,#28201a,#1c1814)">malba 5</div></div>
+                <div class="slide-main-img active">
+                    <picture>
+                        <source srcset="images/general-paintings/D0BB728C-9B87-49A4-B931-D8CC89426525.webp" type="image/webp">
+                        <img src="images/general-paintings/D0BB728C-9B87-49A4-B931-D8CC89426525.jpeg" alt="Obecné malby 1" loading="lazy" decoding="async">
+                    </picture>
+                </div>
+                <div class="slide-main-img">
+                    <picture>
+                        <source srcset="images/general-paintings/IMG_1506.webp" type="image/webp">
+                        <img src="images/general-paintings/IMG_1506.jpeg" alt="Obecné malby 2" loading="lazy" decoding="async">
+                    </picture>
+                </div>
+                <div class="slide-main-img">
+                    <picture>
+                        <source srcset="images/general-paintings/IMG_3950.webp" type="image/webp">
+                        <img src="images/general-paintings/IMG_3950.jpeg" alt="Obecné malby 3" loading="lazy" decoding="async">
+                    </picture>
+                </div>
+                <div class="slide-main-img">
+                    <picture>
+                        <source srcset="images/general-paintings/IMG_8024.webp" type="image/webp">
+                        <img src="images/general-paintings/IMG_8024.jpeg" alt="Obecné malby 4" loading="lazy" decoding="async">
+                    </picture>
+                </div>
+                <!-- 5TH MAIN SLIDE — uncomment once image is added:
+                <div class="slide-main-img"><picture><source srcset="images/general-paintings/FILENAME.webp" type="image/webp"><img src="images/general-paintings/FILENAME.jpeg" alt="Obecné malby 5" loading="lazy" decoding="async"></picture></div>
+                -->
                 <div class="slide-caption">
-                    <span class="slide-label" data-ss="ss-malby">Spolu I</span>
-                    <span class="slide-counter" data-counter="ss-malby">1 / 5</span>
+                    <span class="slide-label" data-ss="ss-malby">Obecné malby I</span>
+                    <span class="slide-counter" data-counter="ss-malby">1 / 4</span>
                 </div>
                 <button class="slide-arrow prev" onclick="slideNav('ss-malby',-1,event)">&#8592;</button>
                 <button class="slide-arrow next" onclick="slideNav('ss-malby',1,event)">&#8594;</button>
             </div>
             <div class="slide-dots" id="dots-ss-malby"></div>
             <div class="slide-thumbs" id="thumbs-ss-malby">
-                <div class="sthumb active" onclick="goSlide('ss-malby',0)"><div class="ph">1</div></div>
-                <div class="sthumb" onclick="goSlide('ss-malby',1)"><div class="ph">2</div></div>
-                <div class="sthumb" onclick="goSlide('ss-malby',2)"><div class="ph">3</div></div>
-                <div class="sthumb" onclick="goSlide('ss-malby',3)"><div class="ph">4</div></div>
-                <div class="sthumb" onclick="goSlide('ss-malby',4)"><div class="ph">5</div></div>
+                <div class="sthumb active" onclick="goSlide('ss-malby',0)">
+                    <picture><source srcset="images/general-paintings/D0BB728C-9B87-49A4-B931-D8CC89426525.webp" type="image/webp"><img src="images/general-paintings/D0BB728C-9B87-49A4-B931-D8CC89426525.jpeg" alt="" loading="lazy" decoding="async"></picture>
+                </div>
+                <div class="sthumb" onclick="goSlide('ss-malby',1)">
+                    <picture><source srcset="images/general-paintings/IMG_1506.webp" type="image/webp"><img src="images/general-paintings/IMG_1506.jpeg" alt="" loading="lazy" decoding="async"></picture>
+                </div>
+                <div class="sthumb" onclick="goSlide('ss-malby',2)">
+                    <picture><source srcset="images/general-paintings/IMG_3950.webp" type="image/webp"><img src="images/general-paintings/IMG_3950.jpeg" alt="" loading="lazy" decoding="async"></picture>
+                </div>
+                <div class="sthumb" onclick="goSlide('ss-malby',3)">
+                    <picture><source srcset="images/general-paintings/IMG_8024.webp" type="image/webp"><img src="images/general-paintings/IMG_8024.jpeg" alt="" loading="lazy" decoding="async"></picture>
+                </div>
+                <!-- 5TH THUMB — uncomment once image is added:
+                <div class="sthumb" onclick="goSlide('ss-malby',4)"><picture><source srcset="images/general-paintings/FILENAME.webp" type="image/webp"><img src="images/general-paintings/FILENAME.jpeg" alt="" loading="lazy" decoding="async"></picture></div>
+                -->
             </div>
         </div>
     </div>
@@ -884,27 +877,60 @@ These experiences naturally permeate my work, which is a continuous search for n
             <span class="cs">Zásadním momentem v mém uměleckém vývoji byla ztráta vlastního ateliéru, která mě přivedla k malbě v plenéru. Přímý kontakt s přírodními živly – na jedné straně náročný a limitující, na straně druhé inspirativní a dobrodružný – se stal nedílnou součástí mého tvůrčího procesu. </span>
             <span class="en" style="display:none">A pivotal moment in my artistic development was the loss of my studio, which led me to paint en plein air. Direct contact with the natural elements—on one hand challenging and limiting, on the other inspiring and adventurous—has become an integral part of my creative process.</span>
         </p>
+        <!-- 4 slides wired (order per image_roxdělení.txt). 5th slot reserved — uncomment the "5TH" blocks once the image is added to images/plain-air/. -->
         <div class="slideshow" id="ss-plener" style="padding:0">
             <div class="slide-main" onclick="openLBSlide('ss-plener')">
-                <div class="slide-main-img active"><div class="ph" style="background:linear-gradient(160deg,#2c2418,#1e1a14)">plenér 1</div></div>
-                <div class="slide-main-img"><div class="ph" style="background:linear-gradient(160deg,#2a2218,#1c1a13)">plenér 2</div></div>
-                <div class="slide-main-img"><div class="ph" style="background:linear-gradient(160deg,#2e2618,#201c14)">plenér 3</div></div>
-                <div class="slide-main-img"><div class="ph" style="background:linear-gradient(160deg,#261e16,#1a1612)">plenér 4</div></div>
-                <div class="slide-main-img"><div class="ph" style="background:linear-gradient(160deg,#302618,#221e15)">plenér 5</div></div>
+                <div class="slide-main-img active">
+                    <picture>
+                        <source srcset="images/plain-air/IMG_2320.webp" type="image/webp">
+                        <img src="images/plain-air/IMG_2320.jpeg" alt="Plenér 1" loading="lazy" decoding="async">
+                    </picture>
+                </div>
+                <div class="slide-main-img">
+                    <picture>
+                        <source srcset="images/plain-air/IMG_7299.webp" type="image/webp">
+                        <img src="images/plain-air/IMG_7299.jpeg" alt="Plenér 2" loading="lazy" decoding="async">
+                    </picture>
+                </div>
+                <div class="slide-main-img">
+                    <picture>
+                        <source srcset="images/plain-air/IMG_1127.webp" type="image/webp">
+                        <img src="images/plain-air/IMG_1127.jpeg" alt="Plenér 3" loading="lazy" decoding="async">
+                    </picture>
+                </div>
+                <div class="slide-main-img">
+                    <picture>
+                        <source srcset="images/plain-air/IMG_4837.webp" type="image/webp">
+                        <img src="images/plain-air/IMG_4837.jpeg" alt="Plenér 4" loading="lazy" decoding="async">
+                    </picture>
+                </div>
+                <!-- 5TH MAIN SLIDE — uncomment once image is added:
+                <div class="slide-main-img"><picture><source srcset="images/plain-air/FILENAME.webp" type="image/webp"><img src="images/plain-air/FILENAME.jpeg" alt="Plenér 5" loading="lazy" decoding="async"></picture></div>
+                -->
                 <div class="slide-caption">
                     <span class="slide-label" data-ss="ss-plener">Plenér I</span>
-                    <span class="slide-counter" data-counter="ss-plener">1 / 5</span>
+                    <span class="slide-counter" data-counter="ss-plener">1 / 4</span>
                 </div>
                 <button class="slide-arrow prev" onclick="slideNav('ss-plener',-1,event)">&#8592;</button>
                 <button class="slide-arrow next" onclick="slideNav('ss-plener',1,event)">&#8594;</button>
             </div>
             <div class="slide-dots" id="dots-ss-plener"></div>
             <div class="slide-thumbs" id="thumbs-ss-plener">
-                <div class="sthumb active" onclick="goSlide('ss-plener',0)"><div class="ph">1</div></div>
-                <div class="sthumb" onclick="goSlide('ss-plener',1)"><div class="ph">2</div></div>
-                <div class="sthumb" onclick="goSlide('ss-plener',2)"><div class="ph">3</div></div>
-                <div class="sthumb" onclick="goSlide('ss-plener',3)"><div class="ph">4</div></div>
-                <div class="sthumb" onclick="goSlide('ss-plener',4)"><div class="ph">5</div></div>
+                <div class="sthumb active" onclick="goSlide('ss-plener',0)">
+                    <picture><source srcset="images/plain-air/IMG_2320.webp" type="image/webp"><img src="images/plain-air/IMG_2320.jpeg" alt="" loading="lazy" decoding="async"></picture>
+                </div>
+                <div class="sthumb" onclick="goSlide('ss-plener',1)">
+                    <picture><source srcset="images/plain-air/IMG_7299.webp" type="image/webp"><img src="images/plain-air/IMG_7299.jpeg" alt="" loading="lazy" decoding="async"></picture>
+                </div>
+                <div class="sthumb" onclick="goSlide('ss-plener',2)">
+                    <picture><source srcset="images/plain-air/IMG_1127.webp" type="image/webp"><img src="images/plain-air/IMG_1127.jpeg" alt="" loading="lazy" decoding="async"></picture>
+                </div>
+                <div class="sthumb" onclick="goSlide('ss-plener',3)">
+                    <picture><source srcset="images/plain-air/IMG_4837.webp" type="image/webp"><img src="images/plain-air/IMG_4837.jpeg" alt="" loading="lazy" decoding="async"></picture>
+                </div>
+                <!-- 5TH THUMB — uncomment once image is added:
+                <div class="sthumb" onclick="goSlide('ss-plener',4)"><picture><source srcset="images/plain-air/FILENAME.webp" type="image/webp"><img src="images/plain-air/FILENAME.jpeg" alt="" loading="lazy" decoding="async"></picture></div>
+                -->
             </div>
         </div>
     </div>
@@ -1024,7 +1050,7 @@ These experiences naturally permeate my work, which is a continuous search for n
             <!-- <span class="clabel"><span class="cs">Telefon</span><span class="en" style="display:none">Phone</span></span>
              <span class="cval"><a href="tel:+420792243495">+420 792 243 495</a></span> -->
             <span class="clabel">Email</span>
-            <span class="cval"><a href="mailto:Saskia.kafkova@seznam.cz">Saskia.kafkova@seznam.cz</a></span>
+            <span class="cval"><a href="/cdn-cgi/l/email-protection#abf8cad8c0c2ca85c0cacdc0c4ddcaebd8ced1c5cac685c8d1"><span class="__cf_email__" data-cfemail="eab98b9981838bc4818b8c81859c8baa998f90848b87c48990">[email&#160;protected]</span></a></span>
             <!-- <span class="clabel"><span class="cs">Adresa</span><span class="en" style="display:none">Address</span></span>
              <span class="cval">Tuchorazská 18, Praha 10</span>-->
             <div style="margin-top:20px">
@@ -1054,7 +1080,7 @@ These experiences naturally permeate my work, which is a continuous search for n
     <img id="lbImg" src="" alt="preview">
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     /* ══════════════════════════════════════
        SLIDESHOW ENGINE
        State per slideshow id.
@@ -1163,34 +1189,12 @@ These experiences naturally permeate my work, which is a continuous search for n
     });
 
     /* ══════════════════════════════════════
-       MOBILE NAV
-    ══════════════════════════════════════ */
-    const mobTrig     = document.getElementById('mobNavTrigger');
-    const mobBackdrop = document.getElementById('mobNavBackdrop');
-    let mobNavOpen = false;
-    mobTrig?.addEventListener('click', () => {
-        mobNavOpen = !mobNavOpen;
-        document.body.classList.toggle('mob-nav-open', mobNavOpen);
-    });
-    mobBackdrop?.addEventListener('click', closeMobNav);
-    document.querySelectorAll('.mncard').forEach(c => {
-        c.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            if (!href.startsWith('#')) { closeMobNav(); return; }
-            e.preventDefault();
-            closeMobNav();
-            setTimeout(() => { document.querySelector(href)?.scrollIntoView({behavior:'smooth'}); }, 360);
-        });
-    });
-    function closeMobNav() { mobNavOpen = false; document.body.classList.remove('mob-nav-open'); }
-
-    /* ══════════════════════════════════════
        ESC
     ══════════════════════════════════════ */
     document.addEventListener('keydown', e => {
         if (e.key === 'Escape') {
             navOpen = false; document.body.classList.remove('nav-open');
-            closeMobNav(); closeLB();
+            closeLB();
         }
     });
 
@@ -1217,10 +1221,8 @@ These experiences naturally permeate my work, which is a continuous search for n
     }), {threshold:.07});
     document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-    /* ══════════════════════════════════════
-       YEAR
-    ══════════════════════════════════════ */
-    document.getElementById('yr').textContent = new Date().getFullYear();
+    /* ══ YEAR ══ */
+    document.getElementById('yr').textContent = String(new Date().getFullYear());
 </script>
 </body>
 </html>
