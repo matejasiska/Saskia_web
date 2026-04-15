@@ -187,10 +187,18 @@ footer{background:var(--bg-footer);padding:22px clamp(24px,8vw,140px);display:fl
 /* LIGHTBOX */
 .lightbox{position:fixed;inset:0;z-index:2000;background:rgba(8,6,4,.97);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .4s}
 .lightbox.on{opacity:1;pointer-events:all}
-.lightbox img{max-width:88vw;max-height:86vh;object-fit:contain;transform:scale(.94);transition:transform .4s cubic-bezier(.23,1,.32,1);border-radius:2px}
+.lightbox img{max-width:88vw;max-height:86vh;object-fit:contain;transform:scale(.94);transition:transform .4s cubic-bezier(.23,1,.32,1);border-radius:2px;cursor:zoom-in}
 .lightbox.on img{transform:scale(1)}
+.lightbox.zoomed img{transform:scale(1.6);max-width:96vw;max-height:96vh;cursor:zoom-out}
+.lightbox.single .lb-arrow,.lightbox.single .lb-counter{display:none}
+.zoomable{cursor:zoom-in}
 .lb-close{position:absolute;top:26px;right:30px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);opacity:.35;cursor:pointer;background:none;border:none;font-family:'Jost',sans-serif;transition:opacity .3s}
 .lb-close:hover{opacity:1}
+.lb-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:4;background:rgba(8,6,4,.5);border:1px solid rgba(196,168,130,.25);color:var(--ink);width:52px;height:52px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:20px;transition:background .3s,border-color .3s;line-height:1}
+.lb-arrow:hover{background:rgba(196,168,130,.15);border-color:var(--gold)}
+.lb-prev{left:clamp(12px,4vw,48px)}
+.lb-next{right:clamp(12px,4vw,48px)}
+.lb-counter{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);font-size:10px;letter-spacing:.2em;color:var(--gold-dim);font-family:'Jost',sans-serif;white-space:nowrap}
 
 /* REVEAL */
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s,transform .8s}
@@ -245,6 +253,10 @@ footer{background:var(--bg-footer);padding:22px clamp(24px,8vw,140px);display:fl
   .cgrid{gap:0;margin-top:28px}
   footer{flex-direction:column;gap:5px;text-align:center;padding:16px 22px calc(14px + var(--safe-bottom))}
   .lb-close{top:18px;right:18px}
+  .lb-arrow{width:44px;height:44px;font-size:18px}
+  .lb-prev{left:8px}
+  .lb-next{right:8px}
+  .lb-counter{bottom:20px}
 }
 </style>
 </head>
@@ -336,10 +348,10 @@ footer{background:var(--bg-footer);padding:22px clamp(24px,8vw,140px);display:fl
     <!-- 4 slides wired (order per image_roxdělení.txt). 5th slot reserved — uncomment "5TH" blocks once image is added. -->
     <div class="slideshow" id="ss-proj1">
       <div class="slide-main" onclick="openLBSlide('ss-proj1')">
-        <div class="slide-main-img active"><picture><source srcset="images/projekt-1/IMG_1698.webp" type="image/webp"><img src="images/projekt-1/IMG_1698.jpeg" alt="Projekt 1 — I" loading="lazy" decoding="async"></picture></div>
-        <div class="slide-main-img"><picture><source srcset="images/projekt-1/IMG_1674.webp" type="image/webp"><img src="images/projekt-1/IMG_1674.jpeg" alt="Projekt 1 — II" loading="lazy" decoding="async"></picture></div>
-        <div class="slide-main-img"><picture><source srcset="images/projekt-1/IMG_1677.webp" type="image/webp"><img src="images/projekt-1/IMG_1677.jpeg" alt="Projekt 1 — III" loading="lazy" decoding="async"></picture></div>
-        <div class="slide-main-img"><picture><source srcset="images/projekt-1/IMG_1686.webp" type="image/webp"><img src="images/projekt-1/IMG_1686.jpeg" alt="Projekt 1 — IV" loading="lazy" decoding="async"></picture></div>
+        <div class="slide-main-img active"><picture><source media="(max-width:600px)" srcset="images/projekt-1/IMG_1698_mobile.webp" type="image/webp"><source srcset="images/projekt-1/IMG_1698.webp" type="image/webp"><img src="images/projekt-1/IMG_1698.jpeg" alt="Projekt 1 — I" loading="lazy" decoding="async"></picture></div>
+        <div class="slide-main-img"><picture><source media="(max-width:600px)" srcset="images/projekt-1/IMG_1674_mobile.webp" type="image/webp"><source srcset="images/projekt-1/IMG_1674.webp" type="image/webp"><img src="images/projekt-1/IMG_1674.jpeg" alt="Projekt 1 — II" loading="lazy" decoding="async"></picture></div>
+        <div class="slide-main-img"><picture><source media="(max-width:600px)" srcset="images/projekt-1/IMG_1677_mobile.webp" type="image/webp"><source srcset="images/projekt-1/IMG_1677.webp" type="image/webp"><img src="images/projekt-1/IMG_1677.jpeg" alt="Projekt 1 — III" loading="lazy" decoding="async"></picture></div>
+        <div class="slide-main-img"><picture><source media="(max-width:600px)" srcset="images/projekt-1/IMG_1686_mobile.webp" type="image/webp"><source srcset="images/projekt-1/IMG_1686.webp" type="image/webp"><img src="images/projekt-1/IMG_1686.jpeg" alt="Projekt 1 — IV" loading="lazy" decoding="async"></picture></div>
         <!-- 5TH MAIN SLIDE — uncomment once image is added:
         <div class="slide-main-img"><picture><source srcset="images/projekt-1/FILENAME.webp" type="image/webp"><img src="images/projekt-1/FILENAME.jpeg" alt="Projekt 1 — V" loading="lazy" decoding="async"></picture></div>
         -->
@@ -463,11 +475,14 @@ footer{background:var(--bg-footer);padding:22px clamp(24px,8vw,140px);display:fl
 </footer>
 
 <!-- LIGHTBOX -->
-<div class="lightbox" id="lb" onclick="closeLB()">
+<div class="lightbox" id="lb" onclick="lbBackdropClick(event)">
   <button class="lb-close" onclick="closeLB()">
     <span class="cs">zavřít · esc</span><span class="en" style="display:none">close · esc</span>
   </button>
-  <img id="lbImg" src="" alt="preview">
+  <button class="lb-arrow lb-prev" onclick="lbNav(-1,event)">&#8592;</button>
+  <img id="lbImg" src="" alt="preview" onclick="toggleZoom(event)">
+  <button class="lb-arrow lb-next" onclick="lbNav(1,event)">&#8594;</button>
+  <div class="lb-counter" id="lbCounter"></div>
 </div>
 
 <script>
@@ -524,16 +539,38 @@ function slideNav(id, dir, e) {
   goSlide(id, st.cur + dir);
 }
 
+let lbSsId = null;
+
 function openLBSlide(id) {
   const wrap = document.getElementById(id);
   const st = ssState[id];
   if (!wrap || !st) return;
+  lbSsId = id;
   const active = wrap.querySelectorAll('.slide-main-img')[st.cur];
   const img = active?.querySelector('img');
   const li = document.getElementById('lbImg');
   if (img) { li.src = img.src; li.style.display = ''; }
   else { li.style.display = 'none'; }
-  document.getElementById('lb').classList.add('on');
+  const counter = document.getElementById('lbCounter');
+  if (counter) counter.textContent = (st.cur + 1) + ' / ' + st.total;
+  const lb = document.getElementById('lb');
+  lb.classList.remove('single','zoomed');
+  lb.classList.add('on');
+}
+
+function lbNav(dir, e) {
+  if (e) e.stopPropagation();
+  if (!lbSsId) return;
+  const st = ssState[lbSsId];
+  if (!st) return;
+  goSlide(lbSsId, st.cur + dir);
+  const wrap = document.getElementById(lbSsId);
+  const active = wrap.querySelectorAll('.slide-main-img')[st.cur];
+  const img = active?.querySelector('img');
+  const li = document.getElementById('lbImg');
+  if (img) li.src = img.src;
+  const counter = document.getElementById('lbCounter');
+  if (counter) counter.textContent = (st.cur + 1) + ' / ' + st.total;
 }
 
 // Init slideshows — add new ones here when adding projects
@@ -571,6 +608,10 @@ document.addEventListener('keydown', e => {
     navOpen = false; document.body.classList.remove('nav-open');
     closeMobNav(); closeLB();
   }
+  if (document.getElementById('lb').classList.contains('on')) {
+    if (e.key === 'ArrowLeft') lbNav(-1, null);
+    if (e.key === 'ArrowRight') lbNav(1, null);
+  }
 });
 
 /* ══ LANG ══ */
@@ -582,7 +623,38 @@ function setLang(l) {
 }
 
 /* ══ LIGHTBOX ══ */
-function closeLB() { document.getElementById('lb').classList.remove('on'); }
+function closeLB() {
+  const lb = document.getElementById('lb');
+  lb.classList.remove('on','zoomed','single');
+  lbSsId = null;
+}
+function lbBackdropClick(e) {
+  if (e.target.id === 'lb') closeLB();
+}
+function toggleZoom(e) {
+  if (e) e.stopPropagation();
+  document.getElementById('lb').classList.toggle('zoomed');
+}
+function openLBSingle(src) {
+  lbSsId = null;
+  const lb = document.getElementById('lb');
+  const li = document.getElementById('lbImg');
+  li.src = src;
+  li.style.display = '';
+  lb.classList.add('single');
+  lb.classList.remove('zoomed');
+  lb.classList.add('on');
+}
+// Wire every non-gallery image to open the single-image lightbox
+document.querySelectorAll('img').forEach(img => {
+  if (img.id === 'lbImg') return;
+  if (img.closest('.slide-main') || img.closest('.sthumb') || img.closest('.hero') || img.closest('nav')) return;
+  img.classList.add('zoomable');
+  img.addEventListener('click', (e) => {
+    e.stopPropagation();
+    openLBSingle(img.currentSrc || img.src);
+  });
+});
 
 /* ══ SCROLL REVEAL ══ */
 const obs = new IntersectionObserver(es => es.forEach(e => {

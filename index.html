@@ -408,10 +408,18 @@
         ═══════════════════════════════════════════ */
         .lightbox{position:fixed;inset:0;z-index:2000;background:rgba(8,6,4,.97);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .4s}
         .lightbox.on{opacity:1;pointer-events:all}
-        .lightbox img{max-width:88vw;max-height:86vh;object-fit:contain;transform:scale(.94);transition:transform .4s cubic-bezier(.23,1,.32,1);border-radius:2px}
+        .lightbox img{max-width:88vw;max-height:86vh;object-fit:contain;transform:scale(.94);transition:transform .4s cubic-bezier(.23,1,.32,1);border-radius:2px;cursor:zoom-in}
         .lightbox.on img{transform:scale(1)}
+        .lightbox.zoomed img{transform:scale(1.6);max-width:96vw;max-height:96vh;cursor:zoom-out}
+        .lightbox.single .lb-arrow,.lightbox.single .lb-counter{display:none}
+        .zoomable{cursor:zoom-in}
         .lb-close{position:absolute;top:26px;right:30px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);opacity:.35;cursor:pointer;background:none;border:none;font-family:'Jost',sans-serif;transition:opacity .3s}
         .lb-close:hover{opacity:1}
+        .lb-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:4;background:rgba(8,6,4,.5);border:1px solid rgba(196,168,130,.25);color:var(--ink);width:52px;height:52px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:20px;transition:background .3s,border-color .3s;line-height:1}
+        .lb-arrow:hover{background:rgba(196,168,130,.15);border-color:var(--gold)}
+        .lb-prev{left:clamp(12px,4vw,48px)}
+        .lb-next{right:clamp(12px,4vw,48px)}
+        .lb-counter{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);font-size:10px;letter-spacing:.2em;color:var(--gold-dim);font-family:'Jost',sans-serif;white-space:nowrap}
 
         /* ═══════════════════════════════════════════
            ZKUŠENOSTI — Studium + Výstavy + Rezidence
@@ -508,6 +516,10 @@
             .ig-handle{margin-right:20px}
             footer{flex-direction:column;gap:5px;text-align:center;padding:16px 22px calc(14px + var(--safe-bottom))}
             .lb-close{top:18px;right:18px}
+            .lb-arrow{width:44px;height:44px;font-size:18px}
+            .lb-prev{left:8px}
+            .lb-next{right:8px}
+            .lb-counter{bottom:20px}
             .exh-item{grid-template-columns:1fr;gap:4px;padding:16px 0}
             .exh-place{text-align:left}
             .zkusenosti-sec{padding:40px 22px}
@@ -578,6 +590,7 @@
         </div>
         <div class="about-img">
             <picture>
+                <source media="(max-width:600px)" srcset="images/about-me/IMG_1490_mobile.webp" type="image/webp">
                 <source srcset="images/about-me/IMG_1490.webp" type="image/webp">
                 <img src="images/about-me/IMG_1490.jpeg" alt="Saskia Kafková" loading="lazy" decoding="async">
             </picture>
@@ -816,24 +829,28 @@ These experiences naturally permeate my work, which is a continuous search for n
             <div class="slide-main" onclick="openLBSlide('ss-malby')">
                 <div class="slide-main-img active">
                     <picture>
+                        <source media="(max-width:600px)" srcset="images/general-paintings/D0BB728C-9B87-49A4-B931-D8CC89426525_mobile.webp" type="image/webp">
                         <source srcset="images/general-paintings/D0BB728C-9B87-49A4-B931-D8CC89426525.webp" type="image/webp">
                         <img src="images/general-paintings/D0BB728C-9B87-49A4-B931-D8CC89426525.jpeg" alt="Obecné malby 1" loading="lazy" decoding="async">
                     </picture>
                 </div>
                 <div class="slide-main-img">
                     <picture>
+                        <source media="(max-width:600px)" srcset="images/general-paintings/IMG_1506_mobile.webp" type="image/webp">
                         <source srcset="images/general-paintings/IMG_1506.webp" type="image/webp">
                         <img src="images/general-paintings/IMG_1506.jpeg" alt="Obecné malby 2" loading="lazy" decoding="async">
                     </picture>
                 </div>
                 <div class="slide-main-img">
                     <picture>
+                        <source media="(max-width:600px)" srcset="images/general-paintings/IMG_3950_mobile.webp" type="image/webp">
                         <source srcset="images/general-paintings/IMG_3950.webp" type="image/webp">
                         <img src="images/general-paintings/IMG_3950.jpeg" alt="Obecné malby 3" loading="lazy" decoding="async">
                     </picture>
                 </div>
                 <div class="slide-main-img">
                     <picture>
+                        <source media="(max-width:600px)" srcset="images/general-paintings/IMG_8024_mobile.webp" type="image/webp">
                         <source srcset="images/general-paintings/IMG_8024.webp" type="image/webp">
                         <img src="images/general-paintings/IMG_8024.jpeg" alt="Obecné malby 4" loading="lazy" decoding="async">
                     </picture>
@@ -882,24 +899,28 @@ These experiences naturally permeate my work, which is a continuous search for n
             <div class="slide-main" onclick="openLBSlide('ss-plener')">
                 <div class="slide-main-img active">
                     <picture>
+                        <source media="(max-width:600px)" srcset="images/plain-air/IMG_2320_mobile.webp" type="image/webp">
                         <source srcset="images/plain-air/IMG_2320.webp" type="image/webp">
                         <img src="images/plain-air/IMG_2320.jpeg" alt="Plenér 1" loading="lazy" decoding="async">
                     </picture>
                 </div>
                 <div class="slide-main-img">
                     <picture>
+                        <source media="(max-width:600px)" srcset="images/plain-air/IMG_7299_mobile.webp" type="image/webp">
                         <source srcset="images/plain-air/IMG_7299.webp" type="image/webp">
                         <img src="images/plain-air/IMG_7299.jpeg" alt="Plenér 2" loading="lazy" decoding="async">
                     </picture>
                 </div>
                 <div class="slide-main-img">
                     <picture>
+                        <source media="(max-width:600px)" srcset="images/plain-air/IMG_1127_mobile.webp" type="image/webp">
                         <source srcset="images/plain-air/IMG_1127.webp" type="image/webp">
                         <img src="images/plain-air/IMG_1127.jpeg" alt="Plenér 3" loading="lazy" decoding="async">
                     </picture>
                 </div>
                 <div class="slide-main-img">
                     <picture>
+                        <source media="(max-width:600px)" srcset="images/plain-air/IMG_4837_mobile.webp" type="image/webp">
                         <source srcset="images/plain-air/IMG_4837.webp" type="image/webp">
                         <img src="images/plain-air/IMG_4837.jpeg" alt="Plenér 4" loading="lazy" decoding="async">
                     </picture>
@@ -1073,11 +1094,14 @@ These experiences naturally permeate my work, which is a continuous search for n
 </footer>
 
 <!-- LIGHTBOX -->
-<div class="lightbox" id="lb" onclick="closeLB()">
+<div class="lightbox" id="lb" onclick="lbBackdropClick(event)">
     <button class="lb-close" onclick="closeLB()">
         <span class="cs">zavřít · esc</span><span class="en" style="display:none">close · esc</span>
     </button>
-    <img id="lbImg" src="" alt="preview">
+    <button class="lb-arrow lb-prev" onclick="lbNav(-1,event)">&#8592;</button>
+    <img id="lbImg" src="" alt="preview" onclick="toggleZoom(event)">
+    <button class="lb-arrow lb-next" onclick="lbNav(1,event)">&#8594;</button>
+    <div class="lb-counter" id="lbCounter"></div>
 </div>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
@@ -1152,16 +1176,38 @@ These experiences naturally permeate my work, which is a continuous search for n
         goSlide(id, st.cur + dir);
     }
 
+    let lbSsId = null;
+
     function openLBSlide(id) {
         const wrap = document.getElementById(id);
         const st = ssState[id];
         if (!wrap || !st) return;
+        lbSsId = id;
         const active = wrap.querySelectorAll('.slide-main-img')[st.cur];
         const img = active?.querySelector('img');
         const li = document.getElementById('lbImg');
         if (img) { li.src = img.src; li.style.display = ''; }
         else { li.style.display = 'none'; }
-        document.getElementById('lb').classList.add('on');
+        const counter = document.getElementById('lbCounter');
+        if (counter) counter.textContent = (st.cur + 1) + ' / ' + st.total;
+        const lb = document.getElementById('lb');
+        lb.classList.remove('single','zoomed');
+        lb.classList.add('on');
+    }
+
+    function lbNav(dir, e) {
+        if (e) e.stopPropagation();
+        if (!lbSsId) return;
+        const st = ssState[lbSsId];
+        if (!st) return;
+        goSlide(lbSsId, st.cur + dir);
+        const wrap = document.getElementById(lbSsId);
+        const active = wrap.querySelectorAll('.slide-main-img')[st.cur];
+        const img = active?.querySelector('img');
+        const li = document.getElementById('lbImg');
+        if (img) li.src = img.src;
+        const counter = document.getElementById('lbCounter');
+        if (counter) counter.textContent = (st.cur + 1) + ' / ' + st.total;
     }
 
     // Init all slideshows
@@ -1196,6 +1242,10 @@ These experiences naturally permeate my work, which is a continuous search for n
             navOpen = false; document.body.classList.remove('nav-open');
             closeLB();
         }
+        if (document.getElementById('lb').classList.contains('on')) {
+            if (e.key === 'ArrowLeft') lbNav(-1, null);
+            if (e.key === 'ArrowRight') lbNav(1, null);
+        }
     });
 
     /* ══════════════════════════════════════
@@ -1211,7 +1261,38 @@ These experiences naturally permeate my work, which is a continuous search for n
     /* ══════════════════════════════════════
        LIGHTBOX
     ══════════════════════════════════════ */
-    function closeLB() { document.getElementById('lb').classList.remove('on'); }
+    function closeLB() {
+        const lb = document.getElementById('lb');
+        lb.classList.remove('on','zoomed','single');
+        lbSsId = null;
+    }
+    function lbBackdropClick(e) {
+        if (e.target.id === 'lb') closeLB();
+    }
+    function toggleZoom(e) {
+        if (e) e.stopPropagation();
+        document.getElementById('lb').classList.toggle('zoomed');
+    }
+    function openLBSingle(src) {
+        lbSsId = null;
+        const lb = document.getElementById('lb');
+        const li = document.getElementById('lbImg');
+        li.src = src;
+        li.style.display = '';
+        lb.classList.add('single');
+        lb.classList.remove('zoomed');
+        lb.classList.add('on');
+    }
+    // Wire every non-gallery image to open the single-image lightbox
+    document.querySelectorAll('img').forEach(img => {
+        if (img.id === 'lbImg') return;
+        if (img.closest('.slide-main') || img.closest('.sthumb') || img.closest('.hero') || img.closest('nav')) return;
+        img.classList.add('zoomable');
+        img.addEventListener('click', (e) => {
+            e.stopPropagation();
+            openLBSingle(img.currentSrc || img.src);
+        });
+    });
 
     /* ══════════════════════════════════════
        SCROLL REVEAL
