@@ -141,12 +141,7 @@
             letter-spacing:-.01em;
         }
         .hero-tagline{font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,2vw,1.3rem);font-style:italic;color:rgba(240,235,224,.68);max-width:380px;line-height:1.6;opacity:0;animation:fadeUp 1s .7s forwards}
-        .scroll-hint{position:absolute;bottom:7vh;right:6vw;z-index:2;display:flex;align-items:center;gap:10px;opacity:0;animation:fadeIn 1s 1.2s forwards}
-        .scroll-hint span{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-dim);writing-mode:vertical-rl}
-        .scroll-line{width:1px;height:55px;background:linear-gradient(to bottom,var(--gold-dim),transparent);animation:pulse 2s 1.5s infinite}
         @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-        @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-        @keyframes pulse{0%,100%{opacity:1;transform:scaleY(1)}50%{opacity:.4;transform:scaleY(.6)}}
 
         /* ═══════════════════════════════════════════
            SECTION PRIMITIVES
@@ -177,7 +172,6 @@
         .about-grid > div:first-child{grid-column:1}
         .about-img{position:relative;aspect-ratio:3/4;background:var(--bg-surface);overflow:hidden;border-radius:2px}
         .about-img::before{content:'';position:absolute;top:-8px;right:-8px;width:100%;height:100%;border:1px solid var(--gold-dim);opacity:.5;z-index:-1}
-        .about-img-ph{width:100%;height:100%;background:linear-gradient(160deg,#2f2820,#3a2e1e);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.9rem;color:var(--gold-dim)}
         .about-img img{width:100%;height:100%;object-fit:cover}
 
         /* ═══════════════════════════════════════════
@@ -306,15 +300,6 @@
             font-size:clamp(1.05rem,1.45vw,1.24rem);
             line-height:1.82;color:var(--ink-muted);
             max-width:720px;margin-bottom:34px;
-        }
-
-        /* Technique tags */
-        .tech-tags{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px}
-        .ttag{
-            font-size:9px;letter-spacing:.22em;text-transform:uppercase;
-            color:var(--gold);border:1px solid rgba(196,168,130,.25);
-            padding:5px 12px;border-radius:1px;
-            font-family:'Jost',sans-serif;
         }
 
         /* ═══════════════════════════════════════════
@@ -497,7 +482,6 @@
         @media(max-width:600px){
             /* Desktop hamburger (top-right) is reused on mobile — no override needed */
             .hero{height:58vh;min-height:300px;max-height:460px;padding:0 22px 28px}
-            .scroll-hint{display:none}
             .section{padding:40px 22px}
             .body-text{max-width:100%;font-size:1.05rem}
             .about-grid{gap:28px}
@@ -1068,12 +1052,8 @@ These experiences naturally permeate my work, which is a continuous search for n
     <h2 class="sec-h2"><span class="cs">Kontakt</span><span class="en" style="display:none">Contact</span></h2>
     <div class="cgrid">
         <div>
-            <!-- <span class="clabel"><span class="cs">Telefon</span><span class="en" style="display:none">Phone</span></span>
-             <span class="cval"><a href="tel:+420792243495">+420 792 243 495</a></span> -->
             <span class="clabel">Email</span>
             <span class="cval"><a href="/cdn-cgi/l/email-protection#abf8cad8c0c2ca85c0cacdc0c4ddcaebd8ced1c5cac685c8d1"><span class="__cf_email__" data-cfemail="eab98b9981838bc4818b8c81859c8baa998f90848b87c48990">[email&#160;protected]</span></a></span>
-            <!-- <span class="clabel"><span class="cs">Adresa</span><span class="en" style="display:none">Address</span></span>
-             <span class="cval">Tuchorazská 18, Praha 10</span>-->
             <div style="margin-top:20px">
                 <a href="https://instagram.com/saskiakafkova" target="_blank" class="ig-handle">@saskiakafkova</a>
                 <a href="https://instagram.com/saskiakafkova.art" target="_blank" class="ig-handle">@saskiakafkova.art</a>

@@ -32,25 +32,21 @@ html{scroll-behavior:smooth;height:100%}
 body{background:var(--bg);color:var(--ink);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;min-height:100%}
 
 /* ═══════════════════════════════════════════
-   LANG TOGGLE
-═══════════════════════════════════════════ */
-.lang-toggle{position:fixed;top:22px;left:26px;z-index:1000;display:flex;gap:4px;align-items:center}
-.lang-btn{font-family:'Jost',sans-serif;font-weight:300;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);background:none;border:none;cursor:pointer;padding:4px 6px;opacity:.38;transition:opacity .3s;position:relative}
-.lang-btn.active{opacity:1}
-.lang-btn.active::after{content:'';position:absolute;bottom:0;left:6px;right:6px;height:1px;background:var(--ink)}
-.lang-divider{width:1px;height:10px;background:var(--gold-dim)}
-
-/* ═══════════════════════════════════════════
-   BACK ARROW
+   BACK ARROW (top) + LANG TOGGLE (stacked under)
 ═══════════════════════════════════════════ */
 .back-btn{
-  position:fixed;top:22px;left:90px;z-index:1000;
+  position:fixed;top:20px;left:24px;z-index:1000;
   display:flex;align-items:center;gap:8px;
-  color:var(--ink);text-decoration:none;opacity:.45;
+  color:var(--ink);text-decoration:none;opacity:.55;
   font-family:'Jost',sans-serif;font-size:11px;
   letter-spacing:.15em;text-transform:uppercase;
   transition:opacity .3s;
 }
+.lang-toggle{position:fixed;top:48px;left:20px;z-index:1000;display:flex;gap:4px;align-items:center}
+.lang-btn{font-family:'Jost',sans-serif;font-weight:300;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);background:none;border:none;cursor:pointer;padding:4px 6px;opacity:.38;transition:opacity .3s;position:relative}
+.lang-btn.active{opacity:1}
+.lang-btn.active::after{content:'';position:absolute;bottom:0;left:6px;right:6px;height:1px;background:var(--ink)}
+.lang-divider{width:1px;height:10px;background:var(--gold-dim)}
 .back-btn:hover{opacity:1}
 .back-btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 
@@ -97,11 +93,9 @@ body{background:var(--bg);color:var(--ink);font-family:'Jost',sans-serif;font-we
 /* ═══════════════════════════════════════════
    SECTION PRIMITIVES
 ═══════════════════════════════════════════ */
-.section{padding:clamp(60px,10vw,110px) clamp(24px,8vw,140px);max-width:1200px;margin:0 auto}
 .section-label{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:12px;display:flex;align-items:center;gap:16px}
 .section-label::after{content:'';flex:0 0 36px;height:1px;background:var(--gold-dim)}
 .sec-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,5.5vw,4rem);font-weight:600;font-style:italic;line-height:.95;color:var(--ink);margin-bottom:24px;letter-spacing:-.01em}
-.body-text{font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,1.5vw,1.18rem);line-height:1.88;color:var(--ink-muted);max-width:560px}
 
 /* ═══════════════════════════════════════════
    PROJECT BLOCKS
@@ -204,33 +198,6 @@ footer{background:var(--bg-footer);padding:22px clamp(24px,8vw,140px);display:fl
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s,transform .8s}
 .reveal.vis{opacity:1;transform:translateY(0)}
 
-/* ═══════════════════════════════════════════
-   MOBILE CARD-STACK NAV
-═══════════════════════════════════════════ */
-.mob-nav-stack{display:none;position:fixed;bottom:calc(22px + var(--safe-bottom));right:18px;z-index:300;width:60px;height:60px}
-.mob-nav-trigger{position:absolute;bottom:0;right:0;width:56px;height:56px;background:var(--ink);border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(8,6,4,.55);transition:transform .4s cubic-bezier(.34,1.56,.64,1);z-index:2}
-.mob-nav-trigger:active{transform:scale(.92)}
-.mob-nav-trigger .mlines{display:flex;flex-direction:column;gap:4px}
-.mob-nav-trigger .mlines span{display:block;width:16px;height:1.5px;background:var(--bg);transition:all .4s cubic-bezier(.23,1,.32,1);transform-origin:center}
-.mob-nav-open .mob-nav-trigger .mlines span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
-.mob-nav-open .mob-nav-trigger .mlines span:nth-child(2){opacity:0;transform:scaleX(0)}
-.mob-nav-open .mob-nav-trigger .mlines span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
-.mob-nav-backdrop{position:fixed;inset:0;z-index:250;background:rgba(8,6,4,.8);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .38s}
-.mob-nav-open .mob-nav-backdrop{opacity:1;pointer-events:all}
-.mob-nav-cards{position:absolute;bottom:0;right:0;width:220px;pointer-events:none}
-.mncard{position:absolute;bottom:0;right:0;width:210px;background:var(--bg-surface);border:1px solid var(--border);border-radius:14px;padding:13px 18px 13px 16px;cursor:pointer;text-decoration:none;display:flex;align-items:center;justify-content:space-between;opacity:0;transform:translateY(0) rotate(0deg) scale(.88);transition:transform .5s cubic-bezier(.23,1,.32,1),opacity .35s ease,background .2s;box-shadow:0 4px 20px rgba(8,6,4,.4)}
-.mncard:active{background:var(--bg-surface2)}
-.mncard-label{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;color:var(--ink);line-height:1}
-.mncard-num{font-family:'Jost',sans-serif;font-size:9px;letter-spacing:.18em;color:var(--gold-dim)}
-.mob-nav-open .mob-nav-cards{pointer-events:all}
-.mob-nav-open .mncard:nth-child(1){opacity:1;transform:translateY(-68px) rotate(-1.5deg);transition-delay:.03s}
-.mob-nav-open .mncard:nth-child(2){opacity:1;transform:translateY(-130px) rotate(-.5deg);transition-delay:.07s}
-.mob-nav-open .mncard:nth-child(3){opacity:1;transform:translateY(-192px) rotate(.4deg);transition-delay:.11s}
-.mob-nav-open .mncard:nth-child(4){opacity:1;transform:translateY(-254px) rotate(1deg);transition-delay:.15s}
-.mob-nav-open .mncard:nth-child(5){opacity:1;transform:translateY(-316px) rotate(1.5deg);transition-delay:.19s}
-.mob-nav-open .mncard:nth-child(6){opacity:1;transform:translateY(-378px) rotate(2deg);transition-delay:.23s}
-.mob-nav-open .mncard:nth-child(7){opacity:1;transform:translateY(-440px) rotate(2.4deg);transition-delay:.27s}
-
 /* ─ TABLET ─ */
 @media(max-width:860px){
   .cgrid{grid-template-columns:1fr;gap:28px}
@@ -240,11 +207,9 @@ footer{background:var(--bg-footer);padding:22px clamp(24px,8vw,140px);display:fl
 }
 /* ─ MOBILE ─ */
 @media(max-width:600px){
-  .nav-trigger,.nav-overlay{display:none}
-  .mob-nav-stack{display:block}
-  .back-btn{left:72px}
+  .back-btn{top:18px;left:20px}
+  .lang-toggle{top:44px;left:16px}
   .hero{height:46vh;min-height:280px;max-height:380px;padding:0 22px 24px}
-  .section{padding:36px 22px}
   .project-block{padding:36px 22px}
   .slideshow .slide-main{aspect-ratio:4/3}
   .slide-arrow{display:none}
@@ -290,23 +255,6 @@ footer{background:var(--bg-footer);padding:22px clamp(24px,8vw,140px);display:fl
     <a href="index.html#vystava"><span class="cs">Výstavy</span><span class="en" style="display:none">Exhibitions</span></a>
     <a href="index.html#kontakt"><span class="cs">Kontakt</span><span class="en" style="display:none">Contact</span></a>
   </nav>
-</div>
-
-<!-- MOBILE CARD-STACK NAV -->
-<div class="mob-nav-stack" id="mobNavStack">
-  <div class="mob-nav-backdrop" id="mobNavBackdrop"></div>
-  <div class="mob-nav-cards">
-    <a class="mncard" href="index.html#omne"><span class="mncard-label"><span class="cs">Něco o mně</span><span class="en" style="display:none">About me</span></span><span class="mncard-num">01</span></a>
-    <a class="mncard" href="index.html#tet"><span class="mncard-label"><span class="cs">Tetování</span><span class="en" style="display:none">Tattoo</span></span><span class="mncard-num">02</span></a>
-    <a class="mncard" href="index.html#rit"><span class="mncard-label"><span class="cs">Rituály</span><span class="en" style="display:none">Rituals</span></span><span class="mncard-num">03</span></a>
-    <a class="mncard" href="index.html#malby"><span class="mncard-label"><span class="cs">Malby</span><span class="en" style="display:none">Paintings</span></span><span class="mncard-num">04</span></a>
-    <a class="mncard" href="projekt.html"><span class="mncard-label"><span class="cs">Jiné projekty</span><span class="en" style="display:none">Other projects</span></span><span class="mncard-num">05</span></a>
-    <a class="mncard" href="index.html#vystava"><span class="mncard-label"><span class="cs">Výstavy</span><span class="en" style="display:none">Exhibitions</span></span><span class="mncard-num">06</span></a>
-    <a class="mncard" href="index.html#kontakt"><span class="mncard-label"><span class="cs">Kontakt</span><span class="en" style="display:none">Contact</span></span><span class="mncard-num">07</span></a>
-  </div>
-  <button class="mob-nav-trigger" id="mobNavTrigger" aria-label="Menu">
-    <div class="mlines"><span></span><span></span><span></span></div>
-  </button>
 </div>
 
 <!-- ════════ HERO ════════ -->
@@ -584,29 +532,16 @@ nt.addEventListener('click', () => {
   document.body.classList.toggle('nav-open', navOpen);
 });
 document.querySelectorAll('.nav-links a').forEach(a => {
-  a.addEventListener('click', function(e) {
-    const href = this.getAttribute('href');
+  a.addEventListener('click', () => {
     navOpen = false;
     document.body.classList.remove('nav-open');
-    // Let browser handle cross-page navigation naturally
   });
 });
-
-/* ══ MOBILE NAV ══ */
-const mobTrig     = document.getElementById('mobNavTrigger');
-const mobBackdrop = document.getElementById('mobNavBackdrop');
-let mobNavOpen = false;
-mobTrig?.addEventListener('click', () => {
-  mobNavOpen = !mobNavOpen;
-  document.body.classList.toggle('mob-nav-open', mobNavOpen);
-});
-mobBackdrop?.addEventListener('click', closeMobNav);
-function closeMobNav() { mobNavOpen = false; document.body.classList.remove('mob-nav-open'); }
 
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
     navOpen = false; document.body.classList.remove('nav-open');
-    closeMobNav(); closeLB();
+    closeLB();
   }
   if (document.getElementById('lb').classList.contains('on')) {
     if (e.key === 'ArrowLeft') lbNav(-1, null);
@@ -663,7 +598,7 @@ const obs = new IntersectionObserver(es => es.forEach(e => {
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
 /* ══ YEAR ══ */
-document.getElementById('yr').textContent = new Date().getFullYear();
+document.getElementById('yr').textContent = String(new Date().getFullYear());
 </script>
 </body>
 </html>
